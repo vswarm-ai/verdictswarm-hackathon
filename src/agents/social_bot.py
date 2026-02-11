@@ -67,6 +67,7 @@ class SocialBot(BaseAgent):
             headers = {"Accept": "application/json", "X-Subscription-Token": api_key}
             with httpx.Client(timeout=5.0) as client:
                 for q in queries:
+                    time.sleep(0.3)
                     try:
                         resp = client.get(brave_url, params={"q": q, "count": 5, "freshness": "pw"}, headers=headers)
                         resp.raise_for_status()
@@ -91,6 +92,7 @@ class SocialBot(BaseAgent):
                         print(f"[SocialBot] Pre-search time budget exceeded, stopping after {len(all_items)} items")
                         break
                     try:
+                        time.sleep(0.3)
                         resp = client.get(gnews_url, params={"q": q, "hl": "en-US", "gl": "US", "ceid": "US:en"})
                         resp.raise_for_status()
                         xml = resp.text
@@ -226,6 +228,7 @@ class SocialBot(BaseAgent):
 
         user = self._prepend_fact_sheet(token_data, user)
 
+        time.sleep(0.5)
         out = client.chat_json(
             provider=provider,
             model=model or None,
