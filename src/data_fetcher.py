@@ -418,6 +418,29 @@ class DataFetcher:
             # Solana RPC failed — degrade gracefully
             pass
 
+        # 2b) Holder count via Helius getTokenAccounts
+        try:
+            helius_url = os.environ.get("HELIUS_RPC_URL", "").strip()
+            if helius_url:
+                import urllib.request, json as _json
+                # Use Helius RPC method to get token accounts (page 1, just need total)
+                payload = _json.dumps({
+                    "jsonrpc": "2.0",
+                    "id": "holder-count",
+                    "method": "getTokenAccounts",
+                    "params": {"mint": addr, "limit": 1, "page": 1}
+                }).encode()
+                req = urllib.request.Request(helius_url, data=payload, headers={"Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=5.0) as resp:
+                    result = _json.loads(resp.read())
+                    total = result.get("result", {}).get("total", 0)
+                    if total and int(total) > 0:
+                        out.holder_count = int(total)
+                        data_sources.append("helius-holders")
+                        print(f"[SolanaFetch] Holder count for {addr}: {out.holder_count}")
+        except Exception as e:
+            print(f"[SolanaFetch] Helius holder count failed (non-fatal): {type(e).__name__}: {e}")
+
         # 3) CoinGecko (if Solana token is listed)
         try:
             cats = self._fetch_coingecko_categories(addr, "solana")
