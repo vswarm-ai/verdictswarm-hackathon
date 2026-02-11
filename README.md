@@ -10,6 +10,27 @@
 
 **[verdictswarm.io](https://verdictswarm.io)** — Scan any Solana SPL token or EVM contract address. No signup required.
 
+### For Judges: Quick Start Guide
+
+**Free tier works instantly — no wallet needed.** Just paste an address and scan.
+
+To experience the full flow including **on-chain verdict storage**:
+
+1. Install [Phantom wallet](https://phantom.app/) browser extension
+2. Switch to **Devnet** (Settings → Developer Settings → Change Network → Devnet)
+3. Get free devnet SOL: run `solana airdrop 2` or use the [Solana Faucet](https://faucet.solana.com/)
+4. Connect wallet on verdictswarm.io → you'll be assigned **Investigator tier** (6 agents + Devil's Advocate)
+5. Run a scan → at the end, sign the transaction to store the verdict on Solana
+6. Click the **"On-Chain ✓"** badge to view the transaction on Solana Explorer
+
+**Suggested tokens to scan:**
+| Address | Chain | Why |
+|---------|-------|-----|
+| `So11111111111111111111111111111111111111112` | Solana | SOL — blue chip baseline |
+| `JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN` | Solana | Jupiter — legit DeFi |
+| `DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263` | Solana | BONK — popular memecoin |
+| `0xdac17f958d2ee523a2206206994597c13d831ec7` | Ethereum | USDT — stablecoin |
+
 ## What is VerdictSwarm?
 
 VerdictSwarm deploys a **swarm of 20+ specialized AI agents** powered by **5 top-tier AI providers** that independently analyze crypto tokens, then engage in **adversarial debate** to reach consensus verdicts. Unlike single-model tools (AIXBT, GoPlus, RugCheck), multi-model disagreement IS the signal.
