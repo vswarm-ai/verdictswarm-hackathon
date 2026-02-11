@@ -29,7 +29,7 @@ To experience the full flow including **on-chain verdict storage**:
 | `So11111111111111111111111111111111111111112` | Solana | SOL — blue chip baseline |
 | `JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN` | Solana | Jupiter — legit DeFi |
 | `DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263` | Solana | BONK — popular memecoin |
-| `0xdac17f958d2ee523a2206206994597c13d831ec7` | Ethereum | USDT — stablecoin |
+| `0x6982508145454Ce325dDbE47a25d4ec3d2311933` | Ethereum | PEPE — popular memecoin |
 
 ## What is VerdictSwarm?
 

@@ -2,8 +2,7 @@
 
 import { useState, useEffect, useCallback, use } from "react";
 import Link from "next/link";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-// wagmi/solana wallet imports removed — tier now from server session
+import { useAccount } from "wagmi";
 import { InterrogationRoom } from "@/components/scan/InterrogationRoom";
 import Card from "@/components/ui/Card";
 
@@ -108,7 +107,11 @@ function ResultsView({ result, currentTier = "FREE" }: { result: ScanResult; cur
   });
 
   const address = ((result.fullResults as Record<string, unknown>)?.address as string) || "";
-  const chain = (((result.fullResults as Record<string, unknown>)?.chain as string) || "").toLowerCase();
+  const rawChain = (((result.fullResults as Record<string, unknown>)?.chain as string) || "").toLowerCase();
+  // Detect Solana addresses by format: base58 (no 0x prefix, 32-44 chars)
+  const chain = rawChain && rawChain !== "blockchain" ? rawChain : (
+    address && !address.startsWith("0x") && address.length >= 32 && address.length <= 44 ? "solana" : rawChain || "base"
+  );
   const tokenSnifferChain = chain === "solana" ? "sol" : "eth";
 
   const researchLinks: Array<{ label: string; url: string; icon: string }> = [];
@@ -994,59 +997,23 @@ export default function ScanPage({
   // Tier detection: connected wallet = Tier 1 (Investigator), no wallet = Free (Scout)
   // Pre-token-launch: any connected wallet gets Tier 1 for demo/hackathon
   // URL override: ?tier=TIER_1 or ?tier=TIER_2 for testing
-  // Check server session for actual auth state (wallet adapter auto-reconnects even after sign-out)
-  const [sessionTier, setSessionTier] = useState<string | null>(null);
+  const { isConnected } = useAccount();
+  // Wait for wagmi to hydrate wallet state from persistence before starting scan
+  const [walletReady, setWalletReady] = useState(false);
   useEffect(() => {
-    fetch("/api/user", { cache: "no-store" })
-      .then((r) => r.json())
-      .then((d) => setSessionTier(d.user?.tierKey || "FREE"))
-      .catch(() => setSessionTier("FREE"));
+    const t = setTimeout(() => setWalletReady(true), 500);
+    return () => clearTimeout(t);
   }, []);
-  const walletReady = sessionTier !== null;
-  const tier = sp.tier || sessionTier || "FREE";
+  const tier = sp.tier || (isConnected ? "TIER_1" : "FREE");
   const fresh = sp.fresh === "true";
 
   const [phase, setPhase] = useState<"interrogation" | "results">("interrogation");
   const [scanResult, setScanResult] = useState<ScanResult | null>(null);
 
-  const { publicKey, signTransaction } = useWallet();
-  const { connection } = useConnection();
-
-  const handleComplete = useCallback(async (result: unknown) => {
-    const scanResult = result as ScanResult;
-    setScanResult(scanResult);
+  const handleComplete = useCallback((result: unknown) => {
+    setScanResult(result as ScanResult);
     setPhase("results");
-
-    // Store verdict on-chain if wallet connected
-    if (publicKey && signTransaction && connection) {
-      try {
-        const { storeVerdictOnchain } = await import("@/lib/store-verdict-onchain");
-        const onchainResult = await storeVerdictOnchain(
-          connection,
-          publicKey,
-          signTransaction,
-          {
-            address,
-            chain,
-            score: scanResult.score,
-            grade: scanResult.grade || "",
-            agentCount: scanResult.agentCount || 0,
-            tier: tier,
-            fullReport: scanResult.fullResults as Record<string, unknown> | undefined,
-          }
-        );
-        console.log("[VerdictSwarm] onchainResult:", onchainResult);
-        if (onchainResult) {
-          setScanResult(prev => {
-            console.log("[VerdictSwarm] Updating scanResult with onchainTx");
-            return prev ? { ...prev, onchainTx: { ...onchainResult, network: "devnet" } } : prev;
-          });
-        }
-      } catch (err) {
-        console.error("On-chain storage failed:", err);
-      }
-    }
-  }, [publicKey, signTransaction, connection, address, chain, tier]);
+  }, []);
 
   // Reset on address change
   useEffect(() => {

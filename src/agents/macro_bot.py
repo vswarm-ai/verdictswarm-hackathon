@@ -56,7 +56,11 @@ class MacroBot(BaseAgent):
         mcap = float(token_data.mcap or 0.0)
         sector = "DeFi" if chain in ("ethereum", "base", "arbitrum") else "Solana ecosystem" if chain == "solana" else "crypto"
 
+        from datetime import datetime, timezone
+        current_date = datetime.now(timezone.utc).strftime("%B %d, %Y")
+
         user = (
+            f"TODAY'S DATE: {current_date}\n\n"
             f"Assess the macro environment's impact on {token_data.name} ({token_data.symbol}).\n\n"
             f"Token context: {sector} token, MCap ${mcap:,.0f}, Chain: {chain}\n"
             f"Additional macro data (if provided): {macro_context}\n\n"
