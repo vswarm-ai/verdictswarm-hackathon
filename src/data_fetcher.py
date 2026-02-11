@@ -279,6 +279,10 @@ class DataFetcher:
                 out.mcap = dex.get("mcap", out.mcap)
                 out.fdv = dex.get("fdv", out.fdv)
                 dex_tx_count = int(dex.get("tx_count_24h", 0) or 0)
+                # Use pair age as fallback for contract age if Etherscan fails
+                pair_age = int(dex.get("pair_age_days", 0) or 0)
+                if pair_age > 0 and not out.contract_age_days:
+                    out.contract_age_days = pair_age
                 data_sources.append("dexscreener")
         except Exception:
             # Degrade gracefully.
@@ -367,6 +371,10 @@ class DataFetcher:
                 out.mcap = dex.get("mcap", out.mcap)
                 out.fdv = dex.get("fdv", out.fdv)
                 out.tx_count_24h = int(dex.get("tx_count_24h", 0) or 0)
+                # Use pair creation date for contract age on Solana (no Etherscan equivalent)
+                pair_age = int(dex.get("pair_age_days", 0) or 0)
+                if pair_age > 0:
+                    out.contract_age_days = pair_age
                 data_sources.append("dexscreener")
         except Exception:
             pass
@@ -419,56 +427,54 @@ class DataFetcher:
         except Exception:
             pass
 
-        # 4) Name/symbol fallback — if DexScreener didn't have it
-        if not out.name:
-            # Well-known Solana tokens — enriched metadata for consistency
-            _KNOWN_SOLANA: Dict[str, dict] = {
-                "So11111111111111111111111111111111111111111": {
-                    "name": "Solana", "symbol": "SOL",
-                    "contract_age_days": 1600, "contract_verified": True,
-                    "holder_count": 500_000_000, "top10_holders_pct": 3.5,
-                    "mcap": 95_000_000_000, "volume_24h": 3_000_000_000,
-                    "liquidity_usd": 50_000_000_000,
-                },
-                "So11111111111111111111111111111111111111112": {
-                    "name": "Solana", "symbol": "SOL",
-                    "contract_age_days": 1600, "contract_verified": True,
-                    "holder_count": 500_000_000, "top10_holders_pct": 3.5,
-                    "mcap": 95_000_000_000, "volume_24h": 3_000_000_000,
-                    "liquidity_usd": 50_000_000_000,
-                },
-                "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
-                    "name": "USD Coin", "symbol": "USDC",
-                    "contract_age_days": 1400, "contract_verified": True,
-                },
-                "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
-                    "name": "Tether USD", "symbol": "USDT",
-                    "contract_age_days": 1200, "contract_verified": True,
-                },
-            }
-            known = _KNOWN_SOLANA.get(addr)
-            if known:
-                out.name = known["name"]
-                out.symbol = known["symbol"]
-                # Enrich with known metadata so AI doesn't get sparse data
-                if known.get("contract_age_days") and not out.contract_age_days:
-                    out.contract_age_days = known["contract_age_days"]
-                if known.get("contract_verified"):
-                    out.contract_verified = True
-                # Populate market/holder data for native tokens that DexScreener misses
-                if known.get("holder_count") and not out.holder_count:
-                    out.holder_count = known["holder_count"]
-                if known.get("top10_holders_pct") and not out.top10_holders_pct:
-                    out.top10_holders_pct = known["top10_holders_pct"]
-                if known.get("mcap") and not out.mcap:
-                    out.mcap = known["mcap"]
-                if known.get("volume_24h") and not out.volume_24h:
-                    out.volume_24h = known["volume_24h"]
-                if known.get("liquidity_usd") and not out.liquidity_usd:
-                    out.liquidity_usd = known["liquidity_usd"]
-            else:
-                out.name = "Solana Token"
-                out.symbol = addr[:6]
+        # 4) Well-known Solana tokens — ALWAYS override (DexScreener returns "Wrapped SOL" for native SOL)
+        _KNOWN_SOLANA: Dict[str, dict] = {
+            "So11111111111111111111111111111111111111111": {
+                "name": "Solana", "symbol": "SOL",
+                "contract_age_days": 1600, "contract_verified": True,
+                "holder_count": 500_000_000, "top10_holders_pct": 3.5,
+                "mcap": 95_000_000_000, "volume_24h": 3_000_000_000,
+                "liquidity_usd": 50_000_000_000,
+            },
+            "So11111111111111111111111111111111111111112": {
+                "name": "Solana", "symbol": "SOL",
+                "contract_age_days": 1600, "contract_verified": True,
+                "holder_count": 500_000_000, "top10_holders_pct": 3.5,
+                "mcap": 95_000_000_000, "volume_24h": 3_000_000_000,
+                "liquidity_usd": 50_000_000_000,
+            },
+            "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+                "name": "USD Coin", "symbol": "USDC",
+                "contract_age_days": 1400, "contract_verified": True,
+            },
+            "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+                "name": "Tether USD", "symbol": "USDT",
+                "contract_age_days": 1200, "contract_verified": True,
+            },
+        }
+        known = _KNOWN_SOLANA.get(addr)
+        if known:
+            out.name = known["name"]
+            out.symbol = known["symbol"]
+            # Enrich with known metadata so AI doesn't get sparse data
+            if known.get("contract_age_days") and not out.contract_age_days:
+                out.contract_age_days = known["contract_age_days"]
+            if known.get("contract_verified"):
+                out.contract_verified = True
+            # Populate market/holder data for native tokens that DexScreener misses
+            if known.get("holder_count") and not out.holder_count:
+                out.holder_count = known["holder_count"]
+            if known.get("top10_holders_pct") and not out.top10_holders_pct:
+                out.top10_holders_pct = known["top10_holders_pct"]
+            if known.get("mcap") and not out.mcap:
+                out.mcap = known["mcap"]
+            if known.get("volume_24h") and not out.volume_24h:
+                out.volume_24h = known["volume_24h"]
+            if known.get("liquidity_usd") and not out.liquidity_usd:
+                out.liquidity_usd = known["liquidity_usd"]
+        elif not out.name:
+            out.name = "Solana Token"
+            out.symbol = addr[:6]
 
         return out
 
@@ -629,6 +635,12 @@ class DataFetcher:
         txns_h24 = txns.get("h24") or {}
         tx_count_24h = self._safe_int(txns_h24.get("buys"), 0) + self._safe_int(txns_h24.get("sells"), 0)
 
+        # Extract pair creation time for contract age estimation
+        pair_created_at = best.get("pairCreatedAt", 0)
+        pair_age_days = 0
+        if pair_created_at and isinstance(pair_created_at, (int, float)) and pair_created_at > 0:
+            pair_age_days = max(1, int((time.time() * 1000 - pair_created_at) / (24 * 60 * 60 * 1000)))
+
         return {
             "name": name,
             "symbol": symbol,
@@ -639,6 +651,7 @@ class DataFetcher:
             "mcap": mcap,
             "fdv": fdv,
             "tx_count_24h": tx_count_24h,
+            "pair_age_days": pair_age_days,
         }
 
     # -------------------- Etherscan V2 (multi-chain) --------------------
