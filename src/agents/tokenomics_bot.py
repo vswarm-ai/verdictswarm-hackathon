@@ -63,8 +63,8 @@ class TokenomicsBot(BaseAgent):
         user = (
             "Analyze token distribution, supply dynamics, and tokenomics risk.\n\n"
             f"Token: {token_data.name} ({token_data.symbol})\n"
-            f"Top10 holders %: {float(token_data.top10_holders_pct or 0.0)}\n"
-            f"Holder count: {int(token_data.holder_count or 0)}\n"
+            f"Top10 holders %: {float(token_data.top10_holders_pct or 0.0) if token_data.top10_holders_pct else '[data unavailable]'}\n"
+            f"Holder count: {int(token_data.holder_count or 0) if token_data.holder_count else '[data unavailable — do NOT assume 0 holders]'}\n"
             f"MCAP: ${mcap:,.0f}\n"
             f"FDV: ${fdv:,.0f}\n"
             f"MCap/FDV ratio: {mcap_fdv_ratio} {'(most supply circulating)' if mcap_fdv_ratio and mcap_fdv_ratio > 0.8 else '(significant supply locked/unvested)' if mcap_fdv_ratio and mcap_fdv_ratio < 0.4 else ''}\n"
