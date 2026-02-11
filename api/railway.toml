@@ -1,0 +1,31 @@
+[build]
+# Railway will auto-detect Python, but we keep this explicit.
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[variables]
+# App
+ENV = "prod"
+LOG_LEVEL = "info"
+
+# Redis (set to your Railway Redis URL or external Redis)
+REDIS_URL = "redis://:password@hostname:6379/0"
+
+# API key validation (choose one approach)
+VS_API_KEYS = ""
+API_KEYS_SECRET = ""
+
+# Tier limits (calls/day)
+VS_TIER_LIMIT_AGENT = "1000"
+VS_TIER_LIMIT_PRO = "10000"
+VS_TIER_LIMIT_ENTERPRISE = "100000"
+
+# Upstream model/API keys
+GEMINI_API_KEY = ""
+XAI_API_KEY = ""

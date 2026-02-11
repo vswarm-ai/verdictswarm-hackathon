@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* VerdictSwarm — Cyberpunk Courtroom Theme */
+:root {
+  /* Core palette (from UI_DESIGN_SPEC_MASTER.md) */
+  --vs-bg: #0A0A0E;
+  --vs-surface: #13131F;
+  --vs-surface-2: #1A1A28;
+  --vs-border: #2D2D3A;
+
+  --vs-text: #ffffff;
+  --vs-muted: #a1a1aa;
+
+  --vs-purple: #6B46C1;
+  --vs-cyan: #00D4AA;
+  --vs-cyan-bright: #00D4FF;
+
+  --vs-success: #00D4AA;
+  --vs-warning: #FFD700;
+  --vs-error: #FF0055;
+
+  /* Fonts */
+  --font-orbitron: "Orbitron", monospace;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+@theme inline {
+  --color-vs-bg: var(--vs-bg);
+  --color-vs-surface: var(--vs-surface);
+  --color-vs-surface-2: var(--vs-surface-2);
+  --color-vs-border: var(--vs-border);
+  --color-vs-text: var(--vs-text);
+  --color-vs-muted: var(--vs-muted);
+  --color-vs-purple: var(--vs-purple);
+  --color-vs-cyan: var(--vs-cyan);
+  --color-vs-cyan-bright: var(--vs-cyan-bright);
+  --color-vs-success: var(--vs-success);
+  --color-vs-warning: var(--vs-warning);
+  --color-vs-error: var(--vs-error);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--vs-bg);
+  color: var(--vs-text);
+  font-family: var(--font-body);
+}
+
+/* Hexagonal background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(700px 420px at 20% 0%, rgba(107, 70, 193, 0.15), transparent 60%),
+    radial-gradient(700px 420px at 80% 10%, rgba(0, 212, 170, 0.10), transparent 60%),
+    radial-gradient(900px 520px at 50% 100%, rgba(107, 70, 193, 0.08), transparent 62%);
+  opacity: 1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Focus style */
+:focus-visible {
+  outline: 3px solid var(--vs-cyan);
+  outline-offset: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(107, 70, 193, 0.3); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(107, 70, 193, 0.5); }
+
+/* --- Custom Animations --- */
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px rgba(107, 70, 193, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px currentColor, 0 0 60px currentColor, 0 0 90px rgba(107, 70, 193, 0.5);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes debate-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px #FF0055;
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px #FF0055, 0 0 60px #FF005540;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(107, 70, 193, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(107, 70, 193, 0.6); }
+}
+
+@keyframes hex-appear {
+  0% { opacity: 0; transform: scale(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes scale-in {
+  0% { transform: scale(0.3); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in { animation: fade-in 0.5s ease-out; }
+.animate-scale-in { animation: scale-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-debate-pulse { animation: debate-pulse 1s ease-in-out infinite; }
+.animate-blink { animation: blink 1s step-end infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-hex-appear { animation: hex-appear 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+
+/* Glassmorphism */
+.glass {
+  background: rgba(19, 19, 31, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(107, 70, 193, 0.2);
+}
+
+.glass-hover:hover {
+  box-shadow: 0 0 20px rgba(107, 70, 193, 0.3);
+  border-color: rgba(107, 70, 193, 0.4);
+}
+
+/* Grade colors */
+.grade-safe { color: #00D4AA; }
+.grade-caution { color: #FFD700; }
+.grade-danger { color: #FF0055; }
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #6B46C1, #00D4AA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Primary button gradient */
+.btn-primary {
+  background: linear-gradient(135deg, #6B46C1, #00D4AA);
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 20px rgba(107, 70, 193, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Secondary button outline */
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #6B46C1;
+  color: #6B46C1;
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  background: rgba(107, 70, 193, 0.1);
+  box-shadow: 0 0 15px rgba(107, 70, 193, 0.3);
+}
+
+/* Evidence blur (for tier-gated content) */
+.evidence-blur {
+  filter: blur(6px);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Ticker scroll */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker { animation: ticker-scroll 20s linear infinite; }
+
+/* Scan line effect */
+@keyframes scan-sweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.animate-scan-sweep { animation: scan-sweep 3s ease-in-out infinite; }
+
+/* Hexagon button shape */
+.hex-clip {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+/* Orbitron heading utility */
+.font-orbitron { font-family: var(--font-orbitron); }
+.font-mono-jb { font-family: var(--font-mono); }
+
+/* Risk bar */
+.risk-low { background: linear-gradient(90deg, #00D4AA, #00D4AA); }
+.risk-medium { background: linear-gradient(90deg, #FFD700, #FF8C00); }
+.risk-high { background: linear-gradient(90deg, #FF0055, #FF4444); }
+
+/* War Room animations now handled by Framer Motion in HexagonGrid.tsx + InterrogationRoom.tsx */
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

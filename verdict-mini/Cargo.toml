@@ -1,0 +1,19 @@
+[package]
+name = "verdict-mini"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pinocchio = "0.9"
+pinocchio-log = "0.4"
+pinocchio-system = "0.4"
+
+[lib]
+crate-type = ["cdylib"]
+name = "verdict_mini"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true

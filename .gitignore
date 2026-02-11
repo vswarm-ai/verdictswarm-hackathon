@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.env
+.env.local
+.env.production
+__pycache__/
+*.pyc
+target/
+.anchor/
+test-ledger/
+.DS_Store
+build/
+*.c
+*.o
+setup.py
+.DS_Store
