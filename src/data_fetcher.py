@@ -418,28 +418,61 @@ class DataFetcher:
             # Solana RPC failed — degrade gracefully
             pass
 
-        # 2b) Holder count via Helius getTokenAccounts
+        # 2b) Holder count + top holder analysis via Helius getTokenAccounts
         try:
             helius_url = os.environ.get("HELIUS_RPC_URL", "").strip()
             if helius_url:
                 import urllib.request, json as _json
-                # Use Helius RPC method to get token accounts (page 1, just need total)
-                payload = _json.dumps({
-                    "jsonrpc": "2.0",
-                    "id": "holder-count",
-                    "method": "getTokenAccounts",
-                    "params": {"mint": addr, "limit": 1, "page": 1}
-                }).encode()
-                req = urllib.request.Request(helius_url, data=payload, headers={"Content-Type": "application/json"})
-                with urllib.request.urlopen(req, timeout=5.0) as resp:
-                    result = _json.loads(resp.read())
-                    total = result.get("result", {}).get("total", 0)
-                    if total and int(total) > 0:
-                        out.holder_count = int(total)
-                        data_sources.append("helius-holders")
-                        print(f"[SolanaFetch] Holder count for {addr}: {out.holder_count}")
+
+                def _helius_get_token_accounts(mint: str, limit: int = 1000, page: int = 1) -> dict:
+                    payload = _json.dumps({
+                        "jsonrpc": "2.0",
+                        "id": "holder-count",
+                        "method": "getTokenAccounts",
+                        "params": {"mint": mint, "limit": limit, "page": page}
+                    }).encode()
+                    req = urllib.request.Request(helius_url, data=payload, headers={"Content-Type": "application/json"})
+                    with urllib.request.urlopen(req, timeout=8.0) as resp:
+                        return _json.loads(resp.read())
+
+                # Page 1: get total count + first batch of holders
+                result = _helius_get_token_accounts(addr, limit=1000, page=1)
+                token_accounts = result.get("result", {}).get("token_accounts", [])
+                total = result.get("result", {}).get("total", 0)
+
+                if total and int(total) > 0:
+                    out.holder_count = int(total)
+                    data_sources.append("helius-holders")
+                    print(f"[SolanaFetch] Holder count for {addr}: {out.holder_count}")
+
+                    # Calculate top 10 holder concentration from the first page
+                    # Sort by amount (descending) to find largest holders
+                    amounts = []
+                    for acct in token_accounts:
+                        amt = float(acct.get("amount", 0) or 0)
+                        if amt > 0:
+                            amounts.append(amt)
+
+                    if amounts:
+                        amounts.sort(reverse=True)
+                        total_in_page = sum(amounts)
+                        top10_sum = sum(amounts[:10])
+
+                        # Get total supply for accurate % calculation
+                        try:
+                            supply_resp = self._solana_rpc_call("getTokenSupply", [addr])
+                            supply_val = supply_resp.get("result", {}).get("value", {})
+                            total_supply = float(supply_val.get("amount", 0) or 0)
+                            decimals = int(supply_val.get("decimals", 0) or 0)
+                            if total_supply > 0 and decimals > 0:
+                                # amounts from Helius are raw (no decimals), supply amount is also raw
+                                top10_pct = (top10_sum / total_supply) * 100.0
+                                out.top10_holders_pct = round(top10_pct, 2)
+                                print(f"[SolanaFetch] Top10 holders for {addr}: {out.top10_holders_pct}%")
+                        except Exception as e:
+                            print(f"[SolanaFetch] Supply fetch for top10 calc failed: {e}")
         except Exception as e:
-            print(f"[SolanaFetch] Helius holder count failed (non-fatal): {type(e).__name__}: {e}")
+            print(f"[SolanaFetch] Helius holder data failed (non-fatal): {type(e).__name__}: {e}")
 
         # 3) CoinGecko (if Solana token is listed)
         try:
