@@ -21,7 +21,7 @@
 5. You're instantly assigned **Investigator tier** — this unlocks **6 AI agents + Devil's Advocate + adversarial debate**
 6. Paste a token address (see suggestions below) and hit **Scan**
 7. Watch the **Interrogation Room** — agents activate in real-time, analyze independently, then debate when they disagree
-8. When the scan completes, **sign the transaction in Phantom** — this stores the verdict immutably on Solana devnet as a PDA (Program Derived Address), creating a permanent, verifiable record of the AI analysis
+8. When the scan completes, **sign the transaction in Phantom** — this stores the verdict immutably on Solana devnet as a PDA (Program Derived Address), creating a permanent, verifiable record of the AI analysis. *The app auto-airdrops devnet SOL if your balance is low, so this should just work.* If signing fails for any reason, your scan results are still fully visible — on-chain storage is a bonus, not a blocker.
 9. Click the **"On-Chain ✓"** badge to verify the transaction on Solana Explorer — you can see the verdict hash, score, grade, and agent count stored on-chain
 
 Free tier (no wallet) also works — runs 2 agents without debate. **Disconnect your wallet to see the free tier, reconnect to see Tier 1.** The wallet-connected 6-agent experience is what we built for this hackathon.
