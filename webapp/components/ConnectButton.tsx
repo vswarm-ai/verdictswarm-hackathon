@@ -222,7 +222,7 @@ export default function ConnectButton() {
       {error && <p className="text-sm text-vs-error">{error}</p>}
 
       {walletType === "solana" && solConnected && !isSolanaAuthed && (
-        <p className="text-xs text-white/60">Solana wallet connected. Verify to unlock your tier.</p>
+        <p className="text-xs text-white/60">Solana wallet connected ✓</p>
       )}
 
       {walletType === "evm" && isConnected && !isEvmAuthed && (
