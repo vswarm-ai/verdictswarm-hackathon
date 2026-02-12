@@ -118,7 +118,7 @@ class MacroBot(BaseAgent):
                 risks = out.get("key_risks", [])
                 conf = out.get("confidence", None)
 
-                notes = ["AI macro (Gemini 2.5 Flash)"]
+                notes = ["AI macro (Grok)"]
                 if summary:
                     notes.append(summary)
                 if isinstance(drivers, list) and drivers:
