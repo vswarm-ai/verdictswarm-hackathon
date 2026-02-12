@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, use } from "react";
 import Link from "next/link";
-import { useAccount } from "wagmi";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { InterrogationRoom } from "@/components/scan/InterrogationRoom";
 import Card from "@/components/ui/Card";
 
@@ -997,7 +997,7 @@ export default function ScanPage({
   // Tier detection: connected wallet = Tier 1 (Investigator), no wallet = Free (Scout)
   // Pre-token-launch: any connected wallet gets Tier 1 for demo/hackathon
   // URL override: ?tier=TIER_1 or ?tier=TIER_2 for testing
-  const { isConnected } = useAccount();
+  const { connected: isConnected } = useWallet();
   // Wait for wagmi to hydrate wallet state from persistence before starting scan
   const [walletReady, setWalletReady] = useState(false);
   useEffect(() => {
