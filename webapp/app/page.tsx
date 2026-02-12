@@ -286,7 +286,7 @@ export default function LandingPage() {
             <h2 className="font-orbitron mt-4 text-3xl font-bold uppercase md:text-4xl">More Agents. Smarter Models. Better Verdicts.</h2>
           </div>
 
-          <div className="relative mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+          <div className="relative mt-12 grid gap-6 md:grid-cols-2 max-w-3xl mx-auto">
             <Card className="p-8">
               <div className="text-xs font-bold uppercase tracking-wider text-white/60">Scout</div>
               <div className="mt-2 text-2xl font-bold text-white">Free</div>
@@ -302,63 +302,26 @@ export default function LandingPage() {
 
             <Card className="relative overflow-hidden p-8 border-[#FFD700]/30">
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#6B46C1]/15 via-transparent to-[#00D4AA]/10" />
-              <div className="absolute -right-2 top-4 rotate-12 rounded-full bg-[#FFD700] px-3 py-1 text-xs font-bold text-black">Most Popular</div>
+              <div className="absolute -right-2 top-4 rotate-12 rounded-full bg-[#FFD700] px-3 py-1 text-xs font-bold text-black">Recommended</div>
               <div className="relative">
                 <div className="text-xs font-bold uppercase tracking-wider text-[#FFD700]">Investigator</div>
                 <div className="mt-2 text-2xl font-bold text-white">Pro</div>
-                <div className="mt-1 text-sm text-white/50">Wallet-gated access</div>
+                <div className="mt-1 text-sm text-white/50">Connect Solana wallet</div>
                 <ul className="mt-6 space-y-3 text-sm text-white/70">
                   <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>6 AI agents + Devil&apos;s Advocate</span></li>
-                  <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Gemini Flash + Grok 3 + GPT-4o Mini</span></li>
-                  <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Cross-agent debates + DA peer review</span></li>
+                  <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>4 AI models (Gemini, Grok, GPT, Claude)</span></li>
+                  <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Adversarial debates + DA peer review</span></li>
+                  <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>On-chain verdict storage on Solana</span></li>
                   <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Full evidence locker + share cards</span></li>
                 </ul>
-                <Link href="/tiers" className="btn-primary mt-8 block w-full rounded-xl py-3 text-center text-sm font-bold text-black">Get Started</Link>
+                <Link href="/dapp" className="btn-primary mt-8 block w-full rounded-xl py-3 text-center text-sm font-bold text-black">Connect Wallet &amp; Scan</Link>
               </div>
-            </Card>
-
-            <Card className="p-8">
-              <div className="text-xs font-bold uppercase tracking-wider text-white/60">Prosecutor</div>
-              <div className="mt-2 text-2xl font-bold text-white">Pro+</div>
-              <div className="mt-1 text-sm text-[#FFD700]">🔜 Coming Soon</div>
-              <ul className="mt-6 space-y-3 text-sm text-white/70">
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>All agents + VisionBot</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Upgraded AI (Gemini Pro, Grok 4)</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>API access + source citations</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>30 scans / day</span></li>
-              </ul>
-              <div className="mt-8 w-full rounded-xl border border-[#2D2D3A] bg-[#1A1A28] py-3 text-center text-sm font-medium text-white/40">Coming Soon</div>
-            </Card>
-
-            <Card className="p-8 border-[#FF6B6B]/20">
-              <div className="text-xs font-bold uppercase tracking-wider text-[#FF6B6B]">Grand Jury</div>
-              <div className="mt-2 text-2xl font-bold text-white">Premium</div>
-              <div className="mt-1 text-sm text-[#FFD700]">🔜 Coming Soon</div>
-              <ul className="mt-6 space-y-3 text-sm text-white/70">
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Full swarm of up to 20+ agents</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>All 5 AI providers at max tier</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Multi-pass adversarial analysis</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>On-chain verdict storage on Solana</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Unlimited scans + priority queue</span></li>
-              </ul>
-              <div className="mt-8 w-full rounded-xl border border-[#2D2D3A] bg-[#1A1A28] py-3 text-center text-sm font-medium text-white/40">Coming Soon</div>
-            </Card>
-
-            <Card className="p-8 border-[#FF4500]/20">
-              <div className="text-xs font-bold uppercase tracking-wider text-[#FF4500]">🏛️ Consensus</div>
-              <div className="mt-2 text-2xl font-bold text-white">Ultimate</div>
-              <div className="mt-1 text-sm text-[#FFD700]">🔜 Coming Soon</div>
-              <ul className="mt-6 space-y-3 text-sm text-white/70">
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>4 frontier AIs debate to consensus</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Opus + GPT-5 + Grok 4 + Gemini Pro</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Full debate transcripts</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>~95% accuracy, ±0.5–1% variance</span></li>
-              </ul>
-              <div className="mt-8 w-full rounded-xl border border-[#2D2D3A] bg-[#1A1A28] py-3 text-center text-sm font-medium text-white/40">Coming Soon</div>
             </Card>
           </div>
 
-          <div className="mt-6 text-center">
+          <p className="mt-8 text-center text-sm text-white/40">Future tiers will scale up to 20+ agents with more advanced frontier models, real-time monitoring, and API access.</p>
+
+          <div className="mt-4 text-center">
             <Link href="/tiers" className="text-xs text-[#6B46C1] hover:text-[#7C3AED] transition">View full technical comparison →</Link>
           </div>
         </div>
