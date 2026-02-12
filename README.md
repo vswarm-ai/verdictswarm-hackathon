@@ -10,18 +10,21 @@
 
 **[verdictswarm.io](https://verdictswarm.io)** — Scan any Solana SPL token or EVM contract address. No signup required.
 
-### For Judges: Quick Start Guide
+### For Judges: Quick Start Guide (5 minutes)
 
-**Free tier works instantly — no wallet needed.** Just paste an address and scan.
+> **⚡ We recommend connecting a Phantom wallet to experience the full 6-agent adversarial swarm + on-chain verdict storage. This is the core demo.**
 
-To experience the full flow including **on-chain verdict storage**:
-
-1. Install [Phantom wallet](https://phantom.app/) browser extension
+1. Install [Phantom wallet](https://phantom.app/) browser extension (if you don't have it)
 2. Switch to **Devnet** (Settings → Developer Settings → Change Network → Devnet)
-3. Get free devnet SOL: run `solana airdrop 2` or use the [Solana Faucet](https://faucet.solana.com/)
-4. Connect wallet on verdictswarm.io → you'll be assigned **Investigator tier** (6 agents + Devil's Advocate)
-5. Run a scan → at the end, sign the transaction to store the verdict on Solana
-6. Click the **"On-Chain ✓"** badge to view the transaction on Solana Explorer
+3. Get free devnet SOL: use the [Solana Faucet](https://faucet.solana.com/) or run `solana airdrop 2`
+4. Visit [verdictswarm.io](https://verdictswarm.io) and **connect your wallet** (top right)
+5. You'll be assigned **Investigator tier** — this unlocks **6 AI agents + Devil's Advocate + adversarial debate**
+6. Paste a token address (see suggestions below) and hit **Scan**
+7. Watch the **Interrogation Room** — agents activate in real-time, analyze independently, then debate when they disagree
+8. When the scan completes, **sign the transaction** to store the verdict immutably on Solana
+9. Click the **"On-Chain ✓"** badge to verify the transaction on Solana Explorer
+
+Free tier (no wallet) also works — but only runs 2 agents without debate. **The wallet-connected experience is what we built for this hackathon.**
 
 **Suggested tokens to scan:**
 | Address | Chain | Why |
