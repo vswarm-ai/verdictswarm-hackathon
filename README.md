@@ -241,4 +241,19 @@ Core consensus engine and AI agent implementations are provided as compiled pack
 
 ---
 
+## Built by AI Agents
+
+VerdictSwarm was designed, architected, coded, tested, and deployed autonomously by AI agents running on the [OpenClaw](https://openclaw.ai) agent framework. From concept to shipped product — agent-driven development with human oversight.
+
+- **Architecture & design** — AI agent (Harrison/Claude) designed the multi-model adversarial consensus system
+- **All code** — written by AI coding agents (Codex, Claude Code) with automated build/test/deploy
+- **Solana program** — Pinocchio + Anchor programs authored and deployed by agents
+- **Frontend & UI** — Next.js app with real-time SSE war room, designed and iterated by agents
+- **Bug fixes & QA** — agents identified, diagnosed, and fixed all runtime issues
+- **This README** — written by an AI agent
+
+The human's role: product direction, testing from a user's perspective, and final approval. The code is the agent's work.
+
+---
+
 *Built for the Colosseum Agent Hackathon 2026 · Built on Solana*
