@@ -135,13 +135,19 @@ class TokenomicsBot(BaseAgent):
                 if summary:
                     notes.append(summary)
                 if unlock_risk is not None:
-                    notes.append(f"unlock risk {float(unlock_risk):.0f}/100")
+                    try:
+                        notes.append(f"unlock risk {float(unlock_risk):.0f}/100")
+                    except (ValueError, TypeError):
+                        notes.append(f"unlock risk: {unlock_risk}")
                 if isinstance(positives, list) and positives:
                     notes.append("+ " + ", ".join(str(x) for x in positives[:3]))
                 if isinstance(risks, list) and risks:
                     notes.append("risks: " + ", ".join(str(x) for x in risks[:4]))
                 if conf is not None:
-                    notes.append(f"confidence {float(conf):.2f}")
+                    try:
+                        notes.append(f"confidence {float(conf):.2f}")
+                    except (ValueError, TypeError):
+                        notes.append(f"confidence: {conf}")
             except Exception as e:
                 notes.append(f"AI unavailable ({type(e).__name__})")
 
@@ -150,8 +156,12 @@ class TokenomicsBot(BaseAgent):
             sentiment = "bullish" if score >= 6.5 else "bearish" if score <= 3.5 else "neutral"
             # Heuristic fallback still has value — use 0.4 confidence (not 0.0)
             fallback_conf = 0.4 if not ai_worked else 0.0
+            try:
+                conf_val = float(conf) if ai_worked and conf is not None else fallback_conf
+            except (ValueError, TypeError):
+                conf_val = fallback_conf
             return AgentVerdict(score=score, sentiment=sentiment, reasoning=reasoning, category="Tokenomics",
-                               confidence=float(conf) if ai_worked and conf is not None else fallback_conf)
+                               confidence=conf_val)
 
 
 _CANONICAL_WRAPPED = {
