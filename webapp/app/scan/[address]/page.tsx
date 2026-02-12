@@ -998,13 +998,25 @@ export default function ScanPage({
   // Pre-token-launch: any connected wallet gets Tier 1 for demo/hackathon
   // URL override: ?tier=TIER_1 or ?tier=TIER_2 for testing
   const { connected: isConnected } = useWallet();
-  // Wait for wagmi to hydrate wallet state from persistence before starting scan
+  // Check if user has a verified session (not just wallet connected)
+  const [verified, setVerified] = useState(false);
   const [walletReady, setWalletReady] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => setWalletReady(true), 500);
-    return () => clearTimeout(t);
-  }, []);
-  const tier = sp.tier || (isConnected ? "TIER_1" : "FREE");
+    let cancelled = false;
+    fetch("/api/user", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((data) => {
+        if (!cancelled) {
+          setVerified(!!data?.user?.address);
+          setWalletReady(true);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setWalletReady(true);
+      });
+    return () => { cancelled = true; };
+  }, [isConnected]);
+  const tier = sp.tier || (isConnected && verified ? "TIER_1" : "FREE");
   const fresh = sp.fresh === "true";
 
   const [phase, setPhase] = useState<"interrogation" | "results">("interrogation");
