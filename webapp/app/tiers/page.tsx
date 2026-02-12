@@ -118,7 +118,7 @@ export default function TiersPage() {
             <span className="text-2xl">🔍</span>
             <div>
               <h3 className="font-orbitron text-lg font-bold">Free — Scout Scan</h3>
-              <span className="text-xs text-white/30">No tokens required</span>
+              <span className="text-xs text-white/30">No wallet required</span>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -324,29 +324,6 @@ export default function TiersPage() {
             <p className="text-[10px] text-white/30 mt-1">Each additional perspective narrows the error margin. Multi-agent debate outperforms any single model.</p>
           </div>
         </div>
-      </Card>
-
-      {/* The Growth Flywheel */}
-      <Card className="p-6 border-[#00D4AA]/20">
-        <h2 className="font-orbitron text-lg font-bold text-center mb-4">The Flywheel</h2>
-        <div className="flex flex-wrap justify-center items-center gap-2 text-sm text-white/60">
-          <span className="rounded-lg bg-[#0A0B0F] px-3 py-1.5 border border-[#2D2D3A]">Connect wallet</span>
-          <span className="text-white/30">→</span>
-          <span className="rounded-lg bg-[#0A0B0F] px-3 py-1.5 border border-[#2D2D3A]">Unlock tier</span>
-          <span className="text-white/30">→</span>
-          <span className="rounded-lg bg-[#0A0B0F] px-3 py-1.5 border border-[#2D2D3A]">Scan tokens</span>
-          <span className="text-white/30">→</span>
-          <span className="rounded-lg bg-[#00D4AA]/10 px-3 py-1.5 border border-[#00D4AA]/30 text-[#00D4AA]">Better verdicts</span>
-          <span className="text-white/30">→</span>
-          <span className="rounded-lg bg-[#6B46C1]/10 px-3 py-1.5 border border-[#6B46C1]/30 text-[#6B46C1]">More users</span>
-          <span className="text-white/30">→</span>
-          <span className="rounded-lg bg-[#FFD700]/10 px-3 py-1.5 border border-[#FFD700]/30 text-[#FFD700]">Smarter AI</span>
-          <span className="text-white/30">→</span>
-          <span className="text-white/40 italic">repeat</span>
-        </div>
-        <p className="text-xs text-white/30 text-center mt-4">
-          More scans = more data = smarter agents. The Swarm gets better with every analysis.
-        </p>
       </Card>
 
       {/* CTA */}
