@@ -541,8 +541,8 @@ export default function ScanReport({
               bot: `${c.emoji} ${c.name}`,
               model: c.modelLabel,
               score: scoreValue,
-              summary: summary.slice(0, 400) || "(no summary)",
-              details: summary ? summary.split(/\n+/).filter(Boolean).slice(0, 6) : [],
+              summary: summary.slice(0, 1200) || "(no summary)",
+              details: summary ? summary.split(/\n+/).filter(Boolean).slice(0, 10) : [],
               flags: [],
             };
           });
