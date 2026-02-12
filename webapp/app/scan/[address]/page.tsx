@@ -1015,6 +1015,27 @@ export default function ScanPage({
     setPhase("results");
   }, []);
 
+  // Pick up on-chain tx from localStorage (signing completes after onComplete due to Phantom approval delay)
+  useEffect(() => {
+    if (!scanResult || scanResult.onchainTx) return;
+    const check = () => {
+      try {
+        const stored = localStorage.getItem(`vs:onchain:${address}`);
+        if (stored) {
+          const txData = JSON.parse(stored);
+          if (txData?.txSignature) {
+            setScanResult((prev) => prev ? { ...prev, onchainTx: txData } : prev);
+            localStorage.removeItem(`vs:onchain:${address}`);
+          }
+        }
+      } catch {}
+    };
+    // Poll every second for up to 30s (user may take time to approve in Phantom)
+    const interval = setInterval(check, 1000);
+    const timeout = setTimeout(() => clearInterval(interval), 30000);
+    return () => { clearInterval(interval); clearTimeout(timeout); };
+  }, [scanResult, address]);
+
   // Reset on address change
   useEffect(() => {
     setPhase("interrogation");

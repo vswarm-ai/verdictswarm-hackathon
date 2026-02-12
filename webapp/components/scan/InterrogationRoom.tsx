@@ -215,13 +215,19 @@ export function InterrogationRoom({
         );
 
         if (data?.txSignature) {
-          setOnchainTx({
+          const txData = {
             txSignature: data.txSignature,
             network: "devnet",
             explorerUrl: data.explorerUrl,
             verdictPda: data.verdictPda,
-          });
+          };
+          setOnchainTx(txData);
           setOnchainError(null);
+          // Persist to localStorage so the results page can pick it up
+          // (signing completes after onComplete fires due to Phantom approval delay)
+          try {
+            localStorage.setItem(`vs:onchain:${address}`, JSON.stringify(txData));
+          } catch {}
         } else {
           setOnchainError("⚠️ On-chain signing failed. Make sure Phantom is set to Devnet.");
         }
