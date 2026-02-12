@@ -221,6 +221,7 @@ export class TimelineDirector {
           resolved: false,
           resolution: "",
         };
+        next.debateCount = (next.debateCount || 0) + 1;
         break;
       }
 

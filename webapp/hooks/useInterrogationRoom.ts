@@ -49,6 +49,7 @@ const initialState: InterrogationRoomState = {
   currentPhase: 0,
   terminalLines: [],
   debate: null,
+  debateCount: 0,
   result: null,
   error: null,
 };
@@ -261,6 +262,7 @@ function reducer(state: InterrogationRoomState, action: ReducerAction): Interrog
         ...state,
         state: "debating",
         agents: agentsInDebate,
+        debateCount: state.debateCount + 1,
         debate: {
           agentIds: d.agents,
           topic: d.topic,

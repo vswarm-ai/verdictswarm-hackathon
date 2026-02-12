@@ -146,6 +146,7 @@ export interface TimelineFrame {
   activeAgentId: string | null;
   terminalLines: TerminalLine[];
   debate: DebateVisualState | null;
+  debateCount: number;
   consensusNarrative: string | null;
   finalScore: number | null;
   finalGrade: string | null;
@@ -216,6 +217,7 @@ export const INITIAL_FRAME: TimelineFrame = {
   activeAgentId: null,
   terminalLines: [],
   debate: null,
+  debateCount: 0,
   consensusNarrative: null,
   finalScore: null,
   finalGrade: null,

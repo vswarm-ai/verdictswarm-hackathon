@@ -179,6 +179,7 @@ export interface InterrogationRoomState {
   currentPhase: number;
   terminalLines: TerminalLine[];
   debate: DebateUIState | null;
+  debateCount: number;
   result: ScanResult | null;
   error: { message: string; code: string; retryable: boolean } | null;
 }
