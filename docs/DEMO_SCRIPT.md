@@ -42,7 +42,7 @@
 - **This is the key differentiator** — no other crypto security tool does this
 
 #### 5. Tier System (optional)
-- Show the 5 tiers: Free (2 agents) → Consensus (20+ agents + debate)
+- Show the 5 tiers: Free (2 agents) → Consensus (up to 20+ agents + debate)
 - More agents = more perspectives = higher accuracy
 - Wallet-gated: connect Solana wallet to unlock higher tiers
 

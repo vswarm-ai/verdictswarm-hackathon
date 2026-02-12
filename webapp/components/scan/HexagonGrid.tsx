@@ -127,7 +127,7 @@ const ALL_AGENTS = [
   { id: "VisionBot", name: "VisionBot", displayName: "Vision", color: "#FF6B6B", tier: "TIER_2" },
   { id: "WhaleTracker", name: "WhaleTracker", displayName: "Whale Tracker", color: "#00BFFF", tier: "TIER_2" },
   { id: "LiquidityBot", name: "LiquidityBot", displayName: "Liquidity", color: "#20B2AA", tier: "TIER_2" },
-  // Grand Jury (Tier 3) — +11 agents (20+ total swarm)
+  // Grand Jury (Tier 3) — +11 agents (up to 20+ total swarm)
   { id: "MEVDetector", name: "MEVDetector", displayName: "MEV Detector", color: "#FF4500", tier: "TIER_3" },
   { id: "GovernanceBot", name: "GovernanceBot", displayName: "Governance", color: "#9370DB", tier: "TIER_3" },
   { id: "TeamAnalyzer", name: "TeamAnalyzer", displayName: "Team Intel", color: "#4169E1", tier: "TIER_3" },

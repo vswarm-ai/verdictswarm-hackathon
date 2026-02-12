@@ -20,7 +20,7 @@ No one — not even VerdictSwarm — can alter a verdict after it's stored.
 │                    User's Browser                    │
 │                                                      │
 │  1. Paste token address                              │
-│  2. AI agents scan (5 providers, 20+ agents)         │
+│  2. AI agents scan (5 providers, up to 20+ agents)         │
 │  3. Adversarial debate resolves disagreements        │
 │  4. Verdict generated: score, grade, full breakdown  │
 │                                                      │

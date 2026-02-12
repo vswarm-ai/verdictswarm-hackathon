@@ -39,7 +39,7 @@ export default function AboutPage() {
       {/* The Agent Swarm */}
       <Card className="p-6 space-y-5">
         <h2 className="font-orbitron text-xl font-bold text-white">The Agent Swarm</h2>
-        <p className="text-xs text-white/40 mb-2">20+ agents across 4 tiers, powered by 5 AI providers</p>
+        <p className="text-xs text-white/40 mb-2">Up to 20+ agents across 4 tiers, powered by 5 AI providers</p>
         
         {/* Phase 1 - Free Tier */}
         <div className="space-y-2">

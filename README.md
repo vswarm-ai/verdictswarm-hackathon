@@ -33,7 +33,7 @@ To experience the full flow including **on-chain verdict storage**:
 
 ## What is VerdictSwarm?
 
-VerdictSwarm deploys **specialized AI agents** powered by **5 top-tier AI providers** that independently analyze crypto tokens, then engage in **adversarial debate** to reach consensus verdicts. Free tier runs 2 agents; Pro tier runs 6 agents with Devil's Advocate and adversarial debate. Future tiers will expand to 20+ agents with more advanced frontier models. Unlike single-model tools (AIXBT, GoPlus, RugCheck), multi-model disagreement IS the signal.
+VerdictSwarm deploys **specialized AI agents** powered by **5 top-tier AI providers** that independently analyze crypto tokens, then engage in **adversarial debate** to reach consensus verdicts. Free tier runs 2 agents; Pro tier runs 6 agents with Devil's Advocate and adversarial debate. Future tiers will scale up to 20+ agents with more advanced frontier models. Unlike single-model tools (AIXBT, GoPlus, RugCheck), multi-model disagreement IS the signal.
 
 **AIXBT finds the alpha — VerdictSwarm verifies it's not a rug.**
 

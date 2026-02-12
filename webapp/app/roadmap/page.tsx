@@ -81,7 +81,7 @@ export default function RoadmapPage() {
         status="NEARLY DONE"
         highlight
         milestones={[
-          { title: "20+ specialized AI agents", desc: "Technician, Security, Tokenomics, Social Intel, Macro, Devil's Advocate, VisionBot, LLM ScamBot, Verdict Synthesizer, On-Chain Recorder", status: "done" },
+          { title: "Up to 20+ specialized AI agents", desc: "Technician, Security, Tokenomics, Social Intel, Macro, Devil's Advocate, VisionBot, LLM ScamBot, Verdict Synthesizer, On-Chain Recorder", status: "done" },
           { title: "5 AI providers integrated", desc: "Google Gemini, xAI Grok, Moonshot Kimi, Anthropic Claude, OpenAI Codex — model-agnostic architecture", status: "done" },
           { title: "Adversarial Debate Protocol", desc: "Multi-model debate with Bayesian convergence when agents disagree by >2 points", status: "done" },
           { title: "Solana SPL token scanning", desc: "Native Solana token analysis via Helius RPC — on-chain data, holder analysis, program verification", status: "done" },
@@ -124,7 +124,7 @@ export default function RoadmapPage() {
         status="LATER"
         milestones={[
           { title: "Tier 2 — Prosecutor", desc: "All agents + VisionBot, 5 AI providers at full power, adversarial multi-pass analysis", status: "upcoming" },
-          { title: "Tier 3 — Grand Jury", desc: "Full 20+ agent swarm, unlimited scans, priority queue, on-chain verdicts", status: "upcoming" },
+          { title: "Tier 3 — Grand Jury", desc: "Full swarm of up to 20+ agents, unlimited scans, priority queue, on-chain verdicts", status: "upcoming" },
           { title: "Scan history dashboard", desc: "Personal dashboard with scan history, favorites, re-scan tracking, risk changes over time", status: "upcoming" },
           { title: "Accuracy tracking", desc: "Retroactive score tracking — did our verdicts predict outcomes? Public accuracy leaderboard", status: "upcoming" },
           { title: "Next-gen AI integration", desc: "Continuously upgrade to latest models as they release — architecture is model-agnostic", status: "upcoming" },

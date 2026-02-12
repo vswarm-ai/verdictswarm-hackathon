@@ -103,7 +103,7 @@ const TIER_COPY: Record<TierKey, { name: string; label: string; perks: string[] 
     label: "CONSENSUS · ULTIMATE",
     perks: [
       "ALL models (Gemini, Grok, Kimi, Codex)",
-      "20+ specialized agents",
+      "Up to 20+ specialized agents",
       "Different AI for each function (multiple perspectives)",
       "Full debate until consensus reached",
       "5 debates/day",
