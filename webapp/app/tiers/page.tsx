@@ -123,26 +123,26 @@ export default function TiersPage() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <h4 className="text-xs font-bold text-white/50 uppercase tracking-wider mb-2">Checks</h4>
+              <h4 className="text-xs font-bold text-white/50 uppercase tracking-wider mb-2">Swarm Agents (2)</h4>
               <ul className="space-y-1.5 text-sm text-white/60">
-                <li className="flex items-center gap-2"><span className="text-[#00D4FF]">🧪</span> <strong className="text-white/80">ScamBot</strong> — Regex-based honeypot, rug pull, and scam pattern detection</li>
-                <li className="flex items-center gap-2"><span className="text-white/30">❌</span> <span className="text-white/40">No AI agents at this tier</span></li>
+                <li className="flex items-center gap-2"><span className="text-[#00D4FF]">📊</span> <strong className="text-white/80">TechnicianBot</strong> — On-chain metrics, contract maturity, trading patterns</li>
+                <li className="flex items-center gap-2"><span className="text-[#FF6B6B]">🔒</span> <strong className="text-white/80">SecurityBot</strong> — Smart contract audit, rug pull detection, honeypot scan</li>
               </ul>
             </div>
             <div>
               <h4 className="text-xs font-bold text-white/50 uppercase tracking-wider mb-2">Architecture</h4>
               <ul className="space-y-1.5 text-xs text-white/50">
-                <li>🧠 <strong className="text-white/70">Model:</strong> None (regex + heuristic only)</li>
-                <li>⚡ <strong className="text-white/70">Architecture:</strong> Static analysis — no AI inference</li>
-                <li>🎯 <strong className="text-white/70">Output:</strong> HEALTHY / UNHEALTHY badge (no numeric score)</li>
-                <li>⏱️ <strong className="text-white/70">Speed:</strong> &lt;2 seconds</li>
+                <li>🧠 <strong className="text-white/70">Model:</strong> Gemini Flash</li>
+                <li>⚡ <strong className="text-white/70">Architecture:</strong> 2-agent parallel analysis</li>
+                <li>🎯 <strong className="text-white/70">Output:</strong> Score (0-100), Grade, evidence trail</li>
+                <li>⏱️ <strong className="text-white/70">Speed:</strong> ~10 seconds</li>
               </ul>
             </div>
           </div>
           <div className="mt-4 rounded-lg bg-[#FFD700]/5 border border-[#FFD700]/20 p-3">
             <p className="text-xs text-[#FFD700]/70">
-              <strong>Limitation:</strong> With only 1 AI model and no debate protocol, Scout Scans can miss nuances that
-              multi-model consensus catches. Scores may vary ±10–15% between runs.
+              <strong>Limitation:</strong> With 2 agents and no debate protocol, Scout Scans can miss nuances that
+              full adversarial consensus catches. Scores may vary ±10–15% between runs.
             </p>
           </div>
         </Card>
