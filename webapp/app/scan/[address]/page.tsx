@@ -1052,6 +1052,7 @@ export default function ScanPage({
 
       {phase === "interrogation" && walletReady && (
         <InterrogationRoom
+          key={tier}
           address={address}
           chain={chain}
           tier={tier}
