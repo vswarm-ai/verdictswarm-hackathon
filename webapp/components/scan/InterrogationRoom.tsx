@@ -193,11 +193,9 @@ export function InterrogationRoom({
             const airdropSig = await connection.requestAirdrop(publicKey, 50_000_000); // 0.05 SOL
             await connection.confirmTransaction(airdropSig, "confirmed");
             console.log("[VerdictSwarm] Airdrop successful");
-            balance = await connection.getBalance(publicKey);
           } catch (airdropErr) {
-            console.warn("[VerdictSwarm] Airdrop failed:", airdropErr);
-            setOnchainError("⚠️ Not enough devnet SOL. Make sure Phantom is on Devnet and request SOL from faucet.solana.com");
-            return;
+            console.warn("[VerdictSwarm] Airdrop failed, proceeding to sign anyway:", airdropErr);
+            // Don't return — still attempt signing, let Phantom handle insufficient funds
           }
         }
 
