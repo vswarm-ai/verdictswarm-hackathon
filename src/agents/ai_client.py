@@ -1,28 +1,6 @@
-"""Shared dependency-free LLM client for VerdictSwarm agents.
-
-Design goals:
-- **Stdlib only** (urllib/json/os/re)
-- Simple, explicit provider support:
-  - Gemini (Google Generative Language API)
-  - Grok (xAI chat completions)
-- Helpers for **JSON-first** responses with robust extraction.
-
-All agents should accept an optional ``AIClient`` and fall back to heuristic
-analysis when the relevant API key isn't configured.
-
-Environment variables:
-- ``GEMINI_API_KEY`` (enables Gemini)
-- ``GEMINI_FLASH_MODEL`` (default: gemini-3-flash)
-- ``GEMINI_PRO_MODEL`` (default: gemini-3-pro)
-- ``XAI_API_KEY`` (enables Grok)
-- ``XAI_MODEL`` (default: grok-4)
-- ``OPENAI_API_KEY`` (enables OpenAI)
-- ``ANTHROPIC_API_KEY`` (enables Anthropic)
-- ``MOONSHOT_API_KEY`` (enables Moonshot/Kimi)
-"""
-
 from __future__ import annotations
 
+import ast
 import json
 import logging
 import os
@@ -44,21 +22,21 @@ Provider = Literal["gemini", "xai", "openai", "anthropic", "moonshot"]
 
 
 def _extract_first_json_object(text: str) -> str:
-    """Best-effort extraction of the first JSON object from model output.
-
-    Uses brace-depth matching instead of greedy regex to handle nested objects
-    and avoid grabbing trailing garbage that breaks JSON.parse.
-    """
+    """Best-effort extraction of the first complete JSON object from model output."""
 
     s = (text or "").strip()
     if not s:
         raise ValueError("Empty model response")
 
-    # Common: fenced code blocks.
-    s = re.sub(r"^```(?:json)?\s*", "", s.strip(), flags=re.IGNORECASE)
-    s = re.sub(r"\s*```$", "", s.strip())
+    # Prefer fenced json body if present anywhere in output.
+    fenced = re.search(r"```(?:json)?\s*(.*?)\s*```", s, flags=re.IGNORECASE | re.DOTALL)
+    if fenced:
+        s = fenced.group(1).strip()
 
-    # Find first '{' and match braces to find the complete object.
+    # Also strip leading/trailing fence markers for partial fence cases.
+    s = re.sub(r"^```(?:json)?\s*", "", s, flags=re.IGNORECASE).strip()
+    s = re.sub(r"\s*```$", "", s).strip()
+
     start = s.find("{")
     if start == -1:
         return s
@@ -74,7 +52,7 @@ def _extract_first_json_object(text: str) -> str:
         if c == "\\":
             escape = True
             continue
-        if c == '"' and not escape:
+        if c == '"':
             in_string = not in_string
             continue
         if in_string:
@@ -86,8 +64,7 @@ def _extract_first_json_object(text: str) -> str:
             if depth == 0:
                 return s[start : i + 1]
 
-    # Fallback: greedy regex if brace matching failed (unclosed object).
-    match = re.search(r"\{.*\}", s, flags=re.DOTALL)
+    match = re.search(r"\{.*?\}", s, flags=re.DOTALL)
     return match.group(0) if match else s
 
 
@@ -148,8 +125,6 @@ class AIClient:
             # Moonshot public API model IDs (Kimi). "moonshot-v1-8k" is widely available.
             self.moonshot_model = (os.getenv("MOONSHOT_MODEL") or "moonshot-v1-8k").strip()
 
-    # -------------------- Capability --------------------
-
     def has_provider(self, provider: Provider) -> bool:
         if provider == "gemini":
             return bool(self.gemini_api_key)
@@ -163,8 +138,6 @@ class AIClient:
             return bool(self.moonshot_api_key)
         return False
 
-    # -------------------- Public helpers --------------------
-
     def chat_text(
         self,
         *,
@@ -176,16 +149,6 @@ class AIClient:
         max_output_tokens: int = 700,
         json_mode: bool = False,
     ) -> str:
-        """Request a plain-text response from a provider.
-
-        Unlike ``chat_json``, this method returns the raw model output as a
-        string without JSON parsing.  Useful for debate arguments, narratives,
-        and other free-form text generation.
-
-        Set *json_mode* to True to keep the Gemini ``responseMimeType``
-        set to ``application/json`` (default is ``text/plain``).
-        """
-
         if not self.has_provider(provider):
             raise RuntimeError(f"Provider not configured: {provider}")
 
@@ -209,22 +172,15 @@ class AIClient:
         temperature: float = 0.2,
         max_output_tokens: int = 700,
     ) -> Dict[str, Any]:
-        """Request a JSON object response.
-
-        Raises:
-            RuntimeError if provider isn't configured.
-            ValueError on parsing issues.
-        """
-
         if not self.has_provider(provider):
             raise RuntimeError(f"Provider not configured: {provider}")
 
         last_error: Optional[Exception] = None
         raw_text = ""
-        for attempt in range(3):  # retry up to 3 times on JSON parse failure
+        for attempt in range(3):
             try:
                 if attempt > 0:
-                    time.sleep(1.5)  # delay before retries to let transient issues clear
+                    time.sleep(1.5)
                 raw_text = self._chat_text(
                     provider=provider,
                     system=system,
@@ -238,47 +194,52 @@ class AIClient:
                 try:
                     return json.loads(json_text)
                 except json.JSONDecodeError:
-                    # Some providers/models occasionally return JSON-like objects with
-                    # trailing commas or smart quotes. Try a minimal cleanup pass.
                     cleaned = (
                         json_text.replace("\u201c", '"')
                         .replace("\u201d", '"')
                         .replace("\u2018", "'")
                         .replace("\u2019", "'")
                     )
-                    cleaned = re.sub(r",\s*([}\]])", r"\1", cleaned)  # remove trailing commas
-                    # Fix missing commas between elements: }"key" or ]"key" or "value""key"
+                    cleaned = re.sub(r",\s*([}\]])", r"\1", cleaned)
+                    cleaned = re.sub(r"\b(?:NaN|Infinity|-Infinity)\b", "null", cleaned)
+                    cleaned = re.sub(r"([{,]\s*)([A-Za-z_][A-Za-z0-9_\-]*)(\s*:)", r'\1"\2"\3', cleaned)
+                    cleaned = re.sub(
+                        r"'([^'\\]*(?:\\.[^'\\]*)*)'",
+                        lambda m: '"' + m.group(1).replace('"', '\\"') + '"',
+                        cleaned,
+                    )
                     cleaned = re.sub(r'"\s*\n\s*"', '",\n"', cleaned)
-                    # Fix missing commas after ] or } before "
                     cleaned = re.sub(r'([\]}])\s*\n\s*"', r'\1,\n"', cleaned)
                     cleaned = cleaned.strip()
-                    return json.loads(cleaned)
-            except (json.JSONDecodeError, ValueError) as e:
+
+                    try:
+                        return json.loads(cleaned)
+                    except json.JSONDecodeError:
+                        py_like = cleaned
+                        py_like = re.sub(r"\bnull\b", "None", py_like)
+                        py_like = re.sub(r"\btrue\b", "True", py_like, flags=re.IGNORECASE)
+                        py_like = re.sub(r"\bfalse\b", "False", py_like, flags=re.IGNORECASE)
+                        parsed = ast.literal_eval(py_like)
+                        if isinstance(parsed, dict):
+                            return parsed
+                        raise ValueError("Last-resort parser did not produce an object")
+            except (json.JSONDecodeError, ValueError, SyntaxError) as e:
                 logger.warning(
                     f"chat_json attempt {attempt+1}/3 failed for {provider}: {e}. "
                     f"Raw response (first 200 chars): {raw_text[:200]}"
                 )
                 last_error = e
                 if attempt < 2:
-                    # Bump temperature slightly to get different output
                     temperature = min(temperature + 0.1, 0.5)
                     continue
                 raise
         raise last_error or ValueError("JSON parse failed after retries")
 
-    # -------------------- Provider implementations --------------------
-
     def _request_json(self, req: Request) -> Dict[str, Any]:
-        """Execute an HTTP request and parse JSON.
-
-        Raises a ValueError/RuntimeError with the response body included when possible.
-        """
-
         try:
             with urlopen(req, timeout=float(self.timeout_s)) as resp:
                 raw = resp.read().decode("utf-8")
         except HTTPError as e:
-            # HTTPError is also a file-like object; it may contain a helpful JSON body.
             try:
                 body = e.read().decode("utf-8")
             except Exception:
@@ -340,7 +301,6 @@ class AIClient:
                 max_output_tokens=max_output_tokens,
             )
         if provider == "gemini":
-            # Prefer flash unless caller overrides.
             use_model = model or self.gemini_flash_model
             return self._gemini_generate_text(
                 system=system,
@@ -352,15 +312,7 @@ class AIClient:
             )
         raise ValueError(f"Unknown provider: {provider}")
 
-    def _xai_chat_text(
-        self,
-        *,
-        system: str,
-        user: str,
-        model: str,
-        temperature: float,
-        max_output_tokens: int,
-    ) -> str:
+    def _xai_chat_text(self, *, system: str, user: str, model: str, temperature: float, max_output_tokens: int) -> str:
         payload = {
             "model": model,
             "messages": [
@@ -370,7 +322,6 @@ class AIClient:
             "temperature": float(temperature),
             "max_tokens": int(max_output_tokens),
         }
-
         data = json.dumps(payload).encode("utf-8")
         req = Request(
             self._XAI_CHAT_COMPLETIONS_URL,
@@ -379,29 +330,17 @@ class AIClient:
                 "Authorization": f"Bearer {self.xai_api_key}",
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "User-Agent": "VerdictSwarm/0.1 (AIClient; stdlib; +https://github.com/vswarm-ai/verdictswarm)",
+                "User-Agent": "VerdictSwarm/0.1",
             },
             method="POST",
         )
-
         obj = self._request_json(req)
-        content = (
-            (((obj.get("choices") or [{}])[0].get("message") or {}).get("content"))
-            or ""
-        ).strip()
+        content = ((((obj.get("choices") or [{}])[0].get("message") or {}).get("content")) or "").strip()
         if not content:
             raise ValueError("Empty xAI response")
         return content
 
-    def _openai_chat_text(
-        self,
-        *,
-        system: str,
-        user: str,
-        model: str,
-        temperature: float,
-        max_output_tokens: int,
-    ) -> str:
+    def _openai_chat_text(self, *, system: str, user: str, model: str, temperature: float, max_output_tokens: int) -> str:
         payload = {
             "model": model,
             "messages": [
@@ -411,7 +350,6 @@ class AIClient:
             "temperature": float(temperature),
             "max_tokens": int(max_output_tokens),
         }
-
         data = json.dumps(payload).encode("utf-8")
         req = Request(
             self._OPENAI_CHAT_COMPLETIONS_URL,
@@ -420,28 +358,17 @@ class AIClient:
                 "Authorization": f"Bearer {self.openai_api_key}",
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "User-Agent": "VerdictSwarm/0.1 (AIClient; stdlib; +https://github.com/vswarm-ai/verdictswarm)",
+                "User-Agent": "VerdictSwarm/0.1",
             },
             method="POST",
         )
-
         obj = self._request_json(req)
-        content = (
-            (((obj.get("choices") or [{}])[0].get("message") or {}).get("content")) or ""
-        ).strip()
+        content = ((((obj.get("choices") or [{}])[0].get("message") or {}).get("content")) or "").strip()
         if not content:
             raise ValueError("Empty OpenAI response")
         return content
 
-    def _moonshot_chat_text(
-        self,
-        *,
-        system: str,
-        user: str,
-        model: str,
-        temperature: float,
-        max_output_tokens: int,
-    ) -> str:
+    def _moonshot_chat_text(self, *, system: str, user: str, model: str, temperature: float, max_output_tokens: int) -> str:
         payload = {
             "model": model,
             "messages": [
@@ -451,7 +378,6 @@ class AIClient:
             "temperature": float(temperature),
             "max_tokens": int(max_output_tokens),
         }
-
         data = json.dumps(payload).encode("utf-8")
         req = Request(
             self._MOONSHOT_CHAT_COMPLETIONS_URL,
@@ -460,43 +386,24 @@ class AIClient:
                 "Authorization": f"Bearer {self.moonshot_api_key}",
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "User-Agent": "VerdictSwarm/0.1 (AIClient; stdlib; +https://github.com/vswarm-ai/verdictswarm)",
+                "User-Agent": "VerdictSwarm/0.1",
             },
             method="POST",
         )
-
         obj = self._request_json(req)
-        content = (
-            (((obj.get("choices") or [{}])[0].get("message") or {}).get("content")) or ""
-        ).strip()
+        content = ((((obj.get("choices") or [{}])[0].get("message") or {}).get("content")) or "").strip()
         if not content:
             raise ValueError("Empty Moonshot response")
         return content
 
-    def _anthropic_chat_text(
-        self,
-        *,
-        system: str,
-        user: str,
-        model: str,
-        temperature: float,
-        max_output_tokens: int,
-    ) -> str:
+    def _anthropic_chat_text(self, *, system: str, user: str, model: str, temperature: float, max_output_tokens: int) -> str:
         payload: Dict[str, Any] = {
             "model": model,
             "max_tokens": int(max_output_tokens),
             "temperature": float(temperature),
             "system": str(system),
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": str(user)},
-                    ],
-                }
-            ],
+            "messages": [{"role": "user", "content": [{"type": "text", "text": str(user)}]}],
         }
-
         data = json.dumps(payload).encode("utf-8")
         req = Request(
             self._ANTHROPIC_MESSAGES_URL,
@@ -506,20 +413,15 @@ class AIClient:
                 "anthropic-version": "2023-06-01",
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "User-Agent": "VerdictSwarm/0.1 (AIClient; stdlib; +https://github.com/vswarm-ai/verdictswarm)",
+                "User-Agent": "VerdictSwarm/0.1",
             },
             method="POST",
         )
-
         obj = self._request_json(req)
         parts = obj.get("content") or []
         if not isinstance(parts, list):
             parts = []
-        text = "".join(
-            (p.get("text") or "")
-            for p in parts
-            if isinstance(p, dict) and (p.get("type") == "text" or "text" in p)
-        ).strip()
+        text = "".join((p.get("text") or "") for p in parts if isinstance(p, dict) and (p.get("type") == "text" or "text" in p)).strip()
         if not text:
             raise ValueError("Empty Anthropic response")
         return text
@@ -534,34 +436,18 @@ class AIClient:
         max_output_tokens: int,
         json_mode: bool = True,
     ) -> str:
-        # https://ai.google.dev/api/generate-content
         url = f"{self._GEMINI_BASE_URL}/models/{model}:generateContent?key={self.gemini_api_key}"
         gen_config: Dict[str, Any] = {
             "temperature": float(temperature),
             "maxOutputTokens": int(max_output_tokens),
-            # Gemini 2.5 models require "thinking mode". If the thinking budget is too high
-            # relative to maxOutputTokens, the model may spend the entire budget on thoughts and
-            # return an empty visible response. We cap thinkingBudget to preserve room for output.
-            # Min allowed appears to be 128 on Gemini 2.5 models.
             "thinkingConfig": {"thinkingBudget": max(128, min(1024, int(max_output_tokens * 0.25)))},
         }
-        if json_mode:
-            # Encourage strict JSON output for chat_json callers.
-            gen_config["responseMimeType"] = "application/json"
-        else:
-            gen_config["responseMimeType"] = "text/plain"
-
+        gen_config["responseMimeType"] = "application/json" if json_mode else "text/plain"
         payload: Dict[str, Any] = {
-            "contents": [
-                {
-                    "role": "user",
-                    "parts": [{"text": str(user)}],
-                }
-            ],
+            "contents": [{"role": "user", "parts": [{"text": str(user)}]}],
             "systemInstruction": {"parts": [{"text": str(system)}]},
             "generationConfig": gen_config,
         }
-
         data = json.dumps(payload).encode("utf-8")
         req = Request(
             url,
@@ -569,16 +455,14 @@ class AIClient:
             headers={
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "User-Agent": "VerdictSwarm/0.1 (AIClient; stdlib; +https://github.com/vswarm-ai/verdictswarm)",
+                "User-Agent": "VerdictSwarm/0.1",
             },
             method="POST",
         )
-
         obj = self._request_json(req)
         candidates: List[Dict[str, Any]] = obj.get("candidates") or []
         if not candidates:
             raise ValueError("Empty Gemini candidates")
-
         content = (candidates[0].get("content") or {})
         parts = content.get("parts") or []
         text = "".join((p.get("text") or "") for p in parts if isinstance(p, dict)).strip()

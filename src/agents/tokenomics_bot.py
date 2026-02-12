@@ -87,6 +87,7 @@ class TokenomicsBot(BaseAgent):
             "  positives: string[] (top 4),\n"
             "  confidence: number (0-1)\n"
             "}\n"
+            "Return ONLY a valid JSON object, no markdown fences, no text before or after.\n"
             "If vesting/unlocks data is missing, state unlock_risk is uncertain.\n"
             + (TOKENOMICS_USER_TEMPLATE if TOKENOMICS_USER_TEMPLATE else
                "Be skeptical about insider allocation and unlock risk.")

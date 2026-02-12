@@ -80,6 +80,7 @@ class MacroBot(BaseAgent):
             "  notable_moves: string[] (any known figures buying/selling — empty if none),\n"
             "  confidence: number (0-1)\n"
             "}\n"
+            "Return ONLY a valid JSON object, no markdown fences, no text before or after.\n"
             + (MACRO_USER_TEMPLATE if MACRO_USER_TEMPLATE else
                "Use your knowledge of current market conditions even if macro_context is empty.")
         )
