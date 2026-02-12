@@ -245,6 +245,7 @@ export function InterrogationRoom({
 
   const totalAgents = frame.agents.size;
   const completedAgents = Array.from(frame.agents.values()).filter((a) => a.status === "complete").length;
+  const debateRound = frame.debate?.messages?.length ? Math.max(...frame.debate.messages.map(m => m.round)) : undefined;
   const isDebating = frame.phase === "debating";
 
   return (
@@ -331,7 +332,7 @@ export function InterrogationRoom({
             <TerminalLog lines={frame.terminalLines} />
           </div>
           <div className="pb-3 flex items-center justify-center gap-2">
-            <PhaseIndicator phase={frame.phase} completedAgents={completedAgents} totalAgents={totalAgents} />
+            <PhaseIndicator phase={frame.phase} completedAgents={completedAgents} totalAgents={totalAgents} debateRound={debateRound} debateTotalRounds={3} />
           </div>
         </div>
       </div>

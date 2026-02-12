@@ -6,6 +6,8 @@ interface PhaseIndicatorProps {
   phase: AnimationPhase;
   completedAgents?: number;
   totalAgents?: number;
+  debateRound?: number;
+  debateTotalRounds?: number;
 }
 
 const PHASES = [
@@ -15,7 +17,7 @@ const PHASES = [
   { label: "Verdict", icon: "⚖️" },
 ];
 
-export function PhaseIndicator({ phase, completedAgents = 0, totalAgents = 0 }: PhaseIndicatorProps) {
+export function PhaseIndicator({ phase, completedAgents = 0, totalAgents = 0, debateRound, debateTotalRounds }: PhaseIndicatorProps) {
   const phaseStatus = PHASES.map((_, i) => {
     switch (i) {
       case 0:
@@ -41,7 +43,7 @@ export function PhaseIndicator({ phase, completedAgents = 0, totalAgents = 0 }: 
     phase === "consensus"
       ? "Reaching consensus..."
       : phase === "debating"
-      ? "Debate in progress"
+      ? debateRound ? `Debate — Round ${debateRound}${debateTotalRounds ? `/${debateTotalRounds}` : ""}` : "Debate in progress"
       : phase === "complete"
       ? "Complete"
       : phase === "scanning" && totalAgents > 0
