@@ -1036,11 +1036,11 @@ export default function ScanPage({
     return () => { clearInterval(interval); clearTimeout(timeout); };
   }, [scanResult, address]);
 
-  // Reset on address change
+  // Reset on address or tier change (wallet connect/disconnect)
   useEffect(() => {
     setPhase("interrogation");
     setScanResult(null);
-  }, [address]);
+  }, [address, tier]);
 
   return (
     <main className="py-6 md:py-10">
