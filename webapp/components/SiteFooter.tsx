@@ -16,8 +16,6 @@ export default function SiteFooter() {
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-white/60">
-              Roadmap
-            </Link>
             <Link href="/docs" className="hover:text-white">
               Docs
             </Link>
