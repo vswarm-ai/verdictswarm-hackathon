@@ -53,6 +53,7 @@ export function InterrogationRoom({
     explorerUrl: string;
     verdictPda?: string;
   } | null>(null);
+  const [onchainError, setOnchainError] = useState<string | null>(null);
   const onchainFiredRef = useRef(false);
   const scoreRevealFiredRef = useRef(false);
   const completeFiredRef = useRef(false);
@@ -181,31 +182,61 @@ export function InterrogationRoom({
     if (!publicKey || !signTransaction) return; // no wallet connected
     onchainFiredRef.current = true;
 
-    storeVerdictOnchain(
-      connection,
-      publicKey,
-      signTransaction,
-      {
-        address,
-        chain,
-        score: frame.result.score,
-        grade: frame.result.grade,
-        agentCount: frame.result.agentCount,
-        tier,
-        fullReport: frame.result.fullResults,
+    (async () => {
+      try {
+        // Check devnet SOL balance
+        let balance = await connection.getBalance(publicKey);
+        
+        if (balance < 5_000_000) { // < 0.005 SOL
+          console.log("[VerdictSwarm] Low devnet SOL, attempting airdrop...");
+          try {
+            const airdropSig = await connection.requestAirdrop(publicKey, 50_000_000); // 0.05 SOL
+            await connection.confirmTransaction(airdropSig, "confirmed");
+            console.log("[VerdictSwarm] Airdrop successful");
+            balance = await connection.getBalance(publicKey);
+          } catch (airdropErr) {
+            console.warn("[VerdictSwarm] Airdrop failed:", airdropErr);
+            setOnchainError("⚠️ Not enough devnet SOL. Make sure Phantom is on Devnet and request SOL from faucet.solana.com");
+            return;
+          }
+        }
+
+        const data = await storeVerdictOnchain(
+          connection,
+          publicKey,
+          signTransaction,
+          {
+            address,
+            chain,
+            score: frame.result!.score,
+            grade: frame.result!.grade,
+            agentCount: frame.result!.agentCount,
+            tier,
+            fullReport: frame.result!.fullResults,
+          }
+        );
+
+        if (data?.txSignature) {
+          setOnchainTx({
+            txSignature: data.txSignature,
+            network: "devnet",
+            explorerUrl: data.explorerUrl,
+            verdictPda: data.verdictPda,
+          });
+          setOnchainError(null);
+        } else {
+          setOnchainError("⚠️ On-chain signing failed. Make sure Phantom is set to Devnet.");
+        }
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        if (msg.includes("User rejected")) {
+          setOnchainError(null); // user cancelled, not an error
+        } else {
+          console.error("[VerdictSwarm] On-chain error:", msg);
+          setOnchainError("⚠️ On-chain storage failed. Ensure Phantom is on Devnet with SOL.");
+        }
       }
-    )
-      .then((data) => {
-        if (data?.txSignature) setOnchainTx({
-          txSignature: data.txSignature,
-          network: "devnet",
-          explorerUrl: data.explorerUrl,
-          verdictPda: data.verdictPda,
-        });
-      })
-      .catch(() => {
-        // optional side-effect — don't block scan results
-      });
+    })();
   }, [frame.isComplete, frame.result, address, chain, tier, publicKey, signTransaction, connection]);
 
   const totalAgents = frame.agents.size;
@@ -272,6 +303,11 @@ export function InterrogationRoom({
                   {(onchainTx || frame.onchainTx) && (
                     <div className="mt-3 text-center text-xs text-cyan-400">
                       On-chain verdict stored: {((onchainTx || frame.onchainTx)?.txSignature || "").slice(0, 12)}...
+                    </div>
+                  )}
+                  {onchainError && !onchainTx && (
+                    <div className="mt-3 text-center text-xs text-yellow-400">
+                      {onchainError}
                     </div>
                   )}
                 </div>
