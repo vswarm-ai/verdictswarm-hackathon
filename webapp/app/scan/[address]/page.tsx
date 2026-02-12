@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, use } from "react";
+import { useState, useEffect, useCallback, useRef, use } from "react";
 import Link from "next/link";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { InterrogationRoom } from "@/components/scan/InterrogationRoom";
@@ -1037,11 +1037,15 @@ export default function ScanPage({
     return () => { clearInterval(interval); clearTimeout(timeout); };
   }, [scanResult, address]);
 
-  // Reset on address or tier change (wallet connect/disconnect)
+  // Reset on address change, or tier upgrade (connect wallet) — but not on disconnect while viewing results
+  const prevTierRef = useRef(tier);
   useEffect(() => {
+    const wasDowngrade = prevTierRef.current === "TIER_1" && tier === "FREE";
+    prevTierRef.current = tier;
+    if (wasDowngrade && phase === "results") return; // keep viewing existing report
     setPhase("interrogation");
     setScanResult(null);
-  }, [address, tier]);
+  }, [address, tier]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <main className="py-6 md:py-10">
