@@ -50,6 +50,8 @@ export async function GET(req: Request) {
   const frontendTier = searchParams.get("tier");
   const effectiveTier = frontendTier && session.user?.address ? frontendTier : tierKey;
   backendUrl.searchParams.set("tier", effectiveTier);
+  const fresh = searchParams.get("fresh");
+  if (fresh) backendUrl.searchParams.set("fresh", fresh);
 
   const upstream = await fetch(backendUrl, {
     method: "GET",
