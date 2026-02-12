@@ -48,7 +48,9 @@ export async function GET(req: Request) {
   // Accept frontend tier override for connected wallets
   // Once token launches, remove this and use only session.user.tierKey
   const frontendTier = searchParams.get("tier");
-  const effectiveTier = frontendTier && session.user?.address ? frontendTier : tierKey;
+  // Hackathon: trust frontend tier (wallet connected = TIER_1, no SIWE needed)
+  // Post-launch: re-add session.user?.address check for token-gated tiers
+  const effectiveTier = frontendTier || tierKey;
   backendUrl.searchParams.set("tier", effectiveTier);
   const fresh = searchParams.get("fresh");
   if (fresh) backendUrl.searchParams.set("fresh", fresh);
