@@ -9,6 +9,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useConnection } from "@solana/wallet-adapter-react";
+import { storeVerdictOnchain } from "@/lib/store-verdict-onchain";
 import { useTimeline, TimelineProvider, LIVE_CONFIG, CACHED_CONFIG } from "../../lib/timeline";
 import { HexagonGrid } from "./HexagonGrid";
 import { TerminalLog } from "./TerminalLog";
@@ -40,6 +43,8 @@ export function InterrogationRoom({
 }: InterrogationRoomProps) {
   const router = useRouter();
   const { frame, push, skipToEnd } = useTimeline(LIVE_CONFIG);
+  const { publicKey, signTransaction } = useWallet();
+  const { connection } = useConnection();
 
   const [animatedScore, setAnimatedScore] = useState(0);
   const [onchainTx, setOnchainTx] = useState<{
@@ -173,29 +178,35 @@ export function InterrogationRoom({
 
   useEffect(() => {
     if (!frame.isComplete || !frame.result || onchainFiredRef.current) return;
+    if (!publicKey || !signTransaction) return; // no wallet connected
     onchainFiredRef.current = true;
 
-    fetch("/api/verdict/onchain", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        tokenAddress: address,
+    storeVerdictOnchain(
+      connection,
+      publicKey,
+      signTransaction,
+      {
+        address,
         chain,
         score: frame.result.score,
         grade: frame.result.grade,
         agentCount: frame.result.agentCount,
         tier,
-        scanData: frame.result.fullResults,
-      }),
-    })
-      .then((res) => (res.ok ? res.json() : null))
+        fullReport: frame.result.fullResults,
+      }
+    )
       .then((data) => {
-        if (data?.txSignature) setOnchainTx(data);
+        if (data?.txSignature) setOnchainTx({
+          txSignature: data.txSignature,
+          network: "devnet",
+          explorerUrl: data.explorerUrl,
+          verdictPda: data.verdictPda,
+        });
       })
       .catch(() => {
-        // optional side-effect
+        // optional side-effect — don't block scan results
       });
-  }, [frame.isComplete, frame.result, address, chain, tier]);
+  }, [frame.isComplete, frame.result, address, chain, tier, publicKey, signTransaction, connection]);
 
   const totalAgents = frame.agents.size;
   const completedAgents = Array.from(frame.agents.values()).filter((a) => a.status === "complete").length;
