@@ -68,7 +68,7 @@ const BOT_CATALOG: BotCatalogEntry[] = [
   },
 
   // TIER_2 upgraded model(s)
-  { key: "MacroBot", name: "The Advisor", emoji: "🌍", modelLabel: "Gemini 2.5 Flash (Google)", unlockTier: "TIER_1" },
+  { key: "MacroBot", name: "The Advisor", emoji: "🌍", modelLabel: "Grok (xAI)", unlockTier: "TIER_1" },
   { key: "VisionBot", name: "The Observer", emoji: "👁️", modelLabel: "Gemini 3 Pro (vision)", unlockTier: "TIER_2" },
 ];
 

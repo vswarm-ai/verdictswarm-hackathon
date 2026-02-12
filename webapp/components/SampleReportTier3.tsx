@@ -33,7 +33,7 @@ export default function SampleReportTier3() {
    [Vesting schedule analysis, emission curves,
     inflation impact modeling, holder distribution...]
 
-🌍 MacroBot (Gemini 3 Pro): 7.4/10
+🌍 MacroBot (Grok): 7.4/10
    [Market cycle positioning, sector rotation analysis,
     correlation with BTC/ETH, macro risk factors...]
 

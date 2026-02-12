@@ -79,7 +79,7 @@ Phase 4: Verdict + On-Chain Storage
 |-------|------|-------|
 | 💰 Tokenomics | Supply distribution, inflation, holder concentration, vesting | Gemini Pro |
 | 🐦 Social Intel | Community sentiment, social signals, bot detection, influencers | Grok (xAI) |
-| 🌍 Macro Analyst | Market conditions, sector trends, regulatory signals | Gemini Pro |
+| 🌍 Macro Analyst | Market conditions, sector trends, regulatory signals | Grok |
 | 😈 Devil's Advocate | Challenges every positive finding with counter-evidence | Claude |
 
 ### Phase 3 — Prosecutor & Grand Jury (Tier 2-3)

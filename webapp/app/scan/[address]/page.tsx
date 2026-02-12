@@ -343,7 +343,7 @@ function ResultsView({ result, currentTier = "FREE" }: { result: ScanResult; cur
             Safety: "Claude 3 Haiku (Anthropic)",
             Tokenomics: "Gemini 2.5 Flash (Google)",
             Social: "Grok 3 (xAI)",
-            Macro: "Gemini 2.5 Flash (Google)",
+            Macro: "Grok (xAI)",
             Contrarian: "Gemini 2.5 Flash (Google)",
           };
           return (
@@ -392,7 +392,7 @@ function ResultsView({ result, currentTier = "FREE" }: { result: ScanResult; cur
         {[
           { icon: "💰", label: "Tokenomics", key: "Tokenomics", desc: "Supply, distribution & inflation analysis", model: "Gemini 2.5 Pro", tier: "Tier 1" },
           { icon: "🐦", label: "Social", key: "Social", desc: "Real-time community sentiment via X/social", model: "Grok 4 (xAI)", tier: "Tier 1" },
-          { icon: "🌍", label: "Macro", key: "Macro", desc: "Market conditions & sector analysis", model: "Gemini 2.5 Pro", tier: "Tier 1" },
+          { icon: "🌍", label: "Macro", key: "Macro", desc: "Market conditions & sector analysis", model: "Grok (xAI)", tier: "Tier 1" },
         ].filter((locked) => !categories.some(c => c.label === locked.label)).map((locked) => (
           <Card
             key={locked.label}
