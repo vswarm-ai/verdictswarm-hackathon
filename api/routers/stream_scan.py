@@ -1244,7 +1244,7 @@ async def stream_scan(
             breakdown["Contrarian"] = {
                 "score": float(da_verdict.score),
                 "confidence": getattr(da_verdict, "confidence", 0.5),
-                "summary": "; ".join(da_reasoning.split(";")[:2]).strip() if da_reasoning else "Devil's Advocate review",
+                "summary": da_reasoning or "Devil's Advocate review",
                 "findings": da_findings[:6],
             }
 
