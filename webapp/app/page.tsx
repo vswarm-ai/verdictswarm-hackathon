@@ -225,13 +225,13 @@ export default function LandingPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             <Card className="p-6 text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#00D4FF]/10 text-3xl">🔍</div>
-              <h3 className="font-bold text-[#00D4FF]">Phase 1: Recon</h3>
-              <p className="mt-2 text-xs text-white/50">Technician &amp; Security agents independently scan on-chain data, contract code, and liquidity via Helius RPC. Zero groupthink.</p>
+              <h3 className="font-bold text-[#00D4FF]">Phase 1: Independent Analysis</h3>
+              <p className="mt-2 text-xs text-white/50">All 6 agents activate in parallel — Technician, Security, Tokenomics, Social Intel, and Macro independently analyze on-chain data, contract code, liquidity, sentiment, and market context. Zero groupthink.</p>
             </Card>
             <Card className="p-6 text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#6B46C1]/10 text-3xl">🧠</div>
-              <h3 className="font-bold text-[#6B46C1]">Phase 2: Deep Analysis</h3>
-              <p className="mt-2 text-xs text-white/50">Tokenomics, Social Intel, and Macro agents layer in market data, holder behavior, sentiment, and sector trends. Devil&apos;s Advocate challenges everything.</p>
+              <h3 className="font-bold text-[#6B46C1]">Phase 2: Adversarial Review</h3>
+              <p className="mt-2 text-xs text-white/50">Devil&apos;s Advocate challenges every positive finding with counter-evidence. Cross-agent disagreements are flagged for debate.</p>
             </Card>
             <Card className="p-6 text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#FF0055]/10 text-3xl">⚡</div>
