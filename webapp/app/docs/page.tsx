@@ -35,13 +35,6 @@ export default function DocsPage() {
         </Link>
 
 
-        <Link href="/roadmap">
-          <Card className="p-6 h-full transition hover:border-[#6B46C1]/40">
-            <span className="text-2xl">🗺️</span>
-            <h2 className="text-lg font-bold text-white mt-2">Roadmap</h2>
-            <p className="text-sm text-white/50 mt-1">The path from free scanner to the swarm.io ecosystem. Where we are and where we&apos;re going.</p>
-          </Card>
-        </Link>
 
         <Link href="/#faq">
           <Card className="p-6 h-full transition hover:border-[#6B46C1]/40">

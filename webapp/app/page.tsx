@@ -414,7 +414,6 @@ export default function LandingPage() {
             <Link href="/tiers" className="btn-secondary inline-flex h-14 items-center justify-center rounded-xl px-10 text-base font-bold uppercase tracking-wider">View Plans</Link>
           </div>
           <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm">
-            <Link href="/roadmap" className="text-white/40 hover:text-white/60 transition">View Roadmap →</Link>
             <span className="text-white/20">|</span>
             <Link href="/tiers" className="text-[#6B46C1] hover:text-[#7C3AED] transition">View Plans →</Link>
           </div>
