@@ -39,11 +39,11 @@ class MacroBot(BaseAgent):
 
     @property
     def description(self) -> str:  # noqa: D401
-        return "Macro regime + sector momentum checks (Gemini 2.5 Flash)."
+        return "Macro regime + sector momentum checks (Grok)."
 
     def _ai_macro_assessment(self, token_data: TokenData) -> Dict[str, Any]:
         client = self.ai_client or AIClient()
-        provider, model = self.routed_provider_model() or ("gemini", self.model_for("gemini") or "")
+        provider, model = self.routed_provider_model() or ("xai", self.model_for("xai") or "")
         if not client.has_provider(provider):
             raise RuntimeError(f"{provider} API key not set")
 
@@ -139,7 +139,7 @@ class MacroBot(BaseAgent):
 
 
 def _mock_macro_score(_: TokenData) -> Tuple[float, list[str]]:
-    return 5.0, ["Macro checks", "macro context not enabled"]
+    return 5.0, ["Macro checks", "heuristic fallback (AI unavailable)"]
 
 
 __all__ = ["MacroBot"]

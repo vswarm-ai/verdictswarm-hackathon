@@ -77,7 +77,7 @@ def get_models_for_tier(tier: TierLevel) -> Dict[str, object]:
             "social": ("xai", grok3),
             "technical": ("openai", gpt4omini),
             "tokenomics": ("gemini", gemini_flash),
-            "macro": ("gemini", gemini_flash),
+            "macro": ("xai", grok3),
             "devils_advocate": ("gemini", gemini_pro),  # DA needs to be smartest agent
             "swarm_debate": None,
         }
