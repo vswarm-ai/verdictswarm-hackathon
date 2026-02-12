@@ -24,9 +24,11 @@ Environment variables:
 from __future__ import annotations
 
 import json
+import logging
 import os
 import re
 import socket
+import time
 from dataclasses import dataclass
 from typing import Any, Dict, List, Literal, Optional
 from urllib.error import HTTPError, URLError
@@ -35,6 +37,8 @@ from urllib.request import Request, urlopen
 # Ensure outbound HTTP requests fail fast (avoid CLI hangs on network stalls)
 socket.setdefaulttimeout(30.0)
 
+
+logger = logging.getLogger(__name__)
 
 Provider = Literal["gemini", "xai", "openai", "anthropic", "moonshot"]
 
@@ -216,8 +220,11 @@ class AIClient:
             raise RuntimeError(f"Provider not configured: {provider}")
 
         last_error: Optional[Exception] = None
-        for attempt in range(2):  # retry once on JSON parse failure
+        raw_text = ""
+        for attempt in range(3):  # retry up to 3 times on JSON parse failure
             try:
+                if attempt > 0:
+                    time.sleep(1.5)  # delay before retries to let transient issues clear
                 raw_text = self._chat_text(
                     provider=provider,
                     system=system,
@@ -247,9 +254,13 @@ class AIClient:
                     cleaned = cleaned.strip()
                     return json.loads(cleaned)
             except (json.JSONDecodeError, ValueError) as e:
+                logger.warning(
+                    f"chat_json attempt {attempt+1}/3 failed for {provider}: {e}. "
+                    f"Raw response (first 200 chars): {raw_text[:200]}"
+                )
                 last_error = e
-                if attempt == 0:
-                    # Retry with slightly higher temperature to get different output
+                if attempt < 2:
+                    # Bump temperature slightly to get different output
                     temperature = min(temperature + 0.1, 0.5)
                     continue
                 raise
