@@ -47,20 +47,24 @@ Every verdict is stored immutably on **Solana** as a PDA, creating a permanent, 
 ```
 User → Paste token address → AI agents activate
 
-Phase 1: Independent Analysis
-  → Technician, Security agents analyze on-chain data
+Phase 1: Independent Analysis (all agents run in parallel)
+  → TechnicianBot — on-chain metrics, contract maturity, trading patterns
+  → SecurityBot — smart contract audit, rug pull detection, honeypot scan
+  → TokenomicsBot — supply distribution, inflation, holder concentration
+  → SocialBot — community sentiment, social signals via Grok
+  → MacroBot — market conditions, sector trends, regulatory context
   
-Phase 2: Cross-Verification  
-  → Tokenomics, Social, Macro agents add perspectives
-  → Devil's Advocate challenges all positive findings
+Phase 2: Adversarial Review
+  → Devil's Advocate challenges all positive findings with counter-evidence
+  → Cross-agent disagreements flagged for debate
   
-Phase 3: Adversarial Debate
+Phase 3: Multi-Model Debate
   → Agents with conflicting scores debate with evidence
   → Bayesian convergence until consensus or split verdict
   
-Phase 4: Verdict
+Phase 4: Verdict + On-Chain Storage
   → Score (0-100), Grade (A+ to F), full evidence trail
-  → Stored on Solana as immutable PDA
+  → SHA-256 hash stored as immutable PDA on Solana
 ```
 
 ## The Agent Swarm
