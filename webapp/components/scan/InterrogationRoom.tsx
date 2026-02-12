@@ -332,7 +332,7 @@ export function InterrogationRoom({
             <TerminalLog lines={frame.terminalLines} />
           </div>
           <div className="pb-3 flex items-center justify-center gap-2">
-            <PhaseIndicator phase={frame.phase} completedAgents={completedAgents} totalAgents={totalAgents} debateRound={debateRound} debateTotalRounds={3} />
+            <PhaseIndicator phase={frame.phase} completedAgents={completedAgents} totalAgents={totalAgents} debateRound={debateRound} />
           </div>
         </div>
       </div>
