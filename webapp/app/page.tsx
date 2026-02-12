@@ -411,7 +411,7 @@ export default function LandingPage() {
           <p className="mx-auto mt-4 max-w-xl text-sm text-white/60">Paste any contract address and get a verdict in seconds. No signup required.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link href="/dapp" className="btn-primary inline-flex h-14 items-center justify-center rounded-xl px-12 text-base font-bold uppercase tracking-wider text-black">Scan Token Now</Link>
-            <Link href="/community" className="btn-secondary inline-flex h-14 items-center justify-center rounded-xl px-10 text-base font-bold uppercase tracking-wider">🐝 Join The Swarm</Link>
+            <Link href="/tiers" className="btn-secondary inline-flex h-14 items-center justify-center rounded-xl px-10 text-base font-bold uppercase tracking-wider">View Plans</Link>
           </div>
           <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm">
             <Link href="/roadmap" className="text-white/40 hover:text-white/60 transition">View Roadmap →</Link>

@@ -31,7 +31,6 @@ export default async function SiteHeader() {
           <nav className="ml-2 hidden items-center gap-1 md:flex">
             <NavLink href="/">Home</NavLink>
             <NavLink href="/dapp">Scan</NavLink>
-            <NavLink href="/community">Community</NavLink>
             <NavLink href="/tiers">Tiers</NavLink>
             <NavLink href="/docs">Docs</NavLink>
             <Link
@@ -60,7 +59,6 @@ export default async function SiteHeader() {
         <nav className="flex flex-wrap gap-1">
           <NavLink href="/">Home</NavLink>
           <NavLink href="/dapp">Scan</NavLink>
-          <NavLink href="/community">Community</NavLink>
           <NavLink href="/tiers">Tiers</NavLink>
           <NavLink href="/docs">Docs</NavLink>
           <Link
