@@ -1040,9 +1040,9 @@ export default function ScanPage({
   // Reset on address change, or tier upgrade (connect wallet) — but not on disconnect while viewing results
   const prevTierRef = useRef(tier);
   useEffect(() => {
-    const wasDowngrade = prevTierRef.current === "TIER_1" && tier === "FREE";
+    const tierChanged = prevTierRef.current !== tier;
     prevTierRef.current = tier;
-    if (wasDowngrade && phase === "results") return; // keep viewing existing report
+    if (tierChanged && phase === "results") return; // keep viewing existing report
     setPhase("interrogation");
     setScanResult(null);
   }, [address, tier]); // eslint-disable-line react-hooks/exhaustive-deps
