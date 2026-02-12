@@ -92,9 +92,9 @@ export default function RoadmapPage() {
           { title: "B2A API + OpenClaw integration", desc: "SKILL.md for any AI agent to use VerdictSwarm — SSE streaming API", status: "done" },
           { title: "On-chain verdict storage", desc: "Solana Anchor program — every scan stored as immutable PDA on-chain", status: "active" },
           { title: "Docker one-command setup", desc: "docker compose up — full stack (frontend + backend + Redis) for easy evaluation", status: "done" },
-          { title: "$VSWARM SPL token launch", desc: "Deploy $VSWARM on Solana — token-gated tier access with burn mechanics", status: "active" },
+          { title: "Pro tier launch", desc: "Wallet-gated access to full 6-agent adversarial analysis on Solana", status: "active" },
           { title: "Tier 1 — Investigator", desc: "6 agents + Devil's Advocate, Gemini Pro + Grok, multi-model debate, full evidence", status: "done" },
-          { title: "Token-gated wallet verification", desc: "Connect wallet → verify $VSWARM holdings → unlock tiers automatically (EVM + Solana)", status: "done" },
+          { title: "Wallet authentication", desc: "Connect Solana wallet to unlock Pro tier analysis automatically", status: "done" },
           { title: "Continuous prompt optimization", desc: "Agent prompts refined with each model release — extracting maximum intelligence per provider", status: "done" },
         ]}
       />
@@ -107,8 +107,8 @@ export default function RoadmapPage() {
         accent="#FFD700"
         status="NEXT"
         milestones={[
-          { title: "Raydium liquidity pool", desc: "Community-driven liquidity on Raydium DEX — locked for long-term stability", status: "upcoming" },
-          { title: "Burn mechanics live", desc: "Every scan burns $VSWARM — live burn counter on site, deflationary by design", status: "upcoming" },
+          { title: "API marketplace", desc: "Third-party protocols integrate VerdictSwarm consensus engine via API", status: "upcoming" },
+          { title: "Usage-based pricing", desc: "Per-scan credit packs for power users — pay only for what you use", status: "upcoming" },
           { title: "Early Swarm Rewards", desc: "Airdrop and rewards for early community supporters", status: "upcoming" },
           { title: "Daily Verdict content series", desc: "Trending Solana token analysis posted daily — \"The Token Court\" format", status: "upcoming" },
           { title: "B2A partnerships", desc: "Free API keys for first 50 Solana AI agents — \"Security Data by VerdictSwarm\"", status: "upcoming" },
@@ -128,7 +128,7 @@ export default function RoadmapPage() {
           { title: "Scan history dashboard", desc: "Personal dashboard with scan history, favorites, re-scan tracking, risk changes over time", status: "upcoming" },
           { title: "Accuracy tracking", desc: "Retroactive score tracking — did our verdicts predict outcomes? Public accuracy leaderboard", status: "upcoming" },
           { title: "Next-gen AI integration", desc: "Continuously upgrade to latest models as they release — architecture is model-agnostic", status: "upcoming" },
-          { title: "Governance voting", desc: "$VSWARM holders vote on burns, features, treasury allocation, new agent development", status: "upcoming" },
+          { title: "Community feedback", desc: "Users vote on features, agent priorities, and new model integrations", status: "upcoming" },
           { title: "Community leaderboards", desc: "Top scanners, accuracy streaks, most rug pulls caught — badges and recognition", status: "upcoming" },
         ]}
       />
@@ -160,7 +160,7 @@ export default function RoadmapPage() {
               AI moves fast, and so does Solana. This roadmap is a living document. 
               We prioritize based on what the community needs, what the market demands, and what the latest 
               AI breakthroughs make possible. Phases may shift, new opportunities may accelerate timelines. 
-              $VSWARM holders will have governance input on priorities.
+              Community members will have input on priorities.
             </p>
           </div>
         </div>

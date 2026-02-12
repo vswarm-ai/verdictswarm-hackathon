@@ -80,12 +80,12 @@ const TIER_COPY: Record<TierKey, { name: string; label: string; perks: string[] 
   },
   TIER_1: {
     name: "Investigator",
-    label: "TIER_1 (50k $VSWARM)",
+    label: "TIER 1 · PRO",
     perks: ["Multi-model AI (GPT-4o, Claude, Gemini, Grok)", "All basic bots enabled", "15 scans/day"],
   },
   TIER_2: {
     name: "Prosecutor",
-    label: "TIER_2 (150k $VSWARM)",
+    label: "TIER 2 · PRO+",
     perks: [
       "Upgraded AI (Gemini 3 Pro)",
       "+ VisionBot (screenshot analysis)",
@@ -95,18 +95,18 @@ const TIER_COPY: Record<TierKey, { name: string; label: string; perks: string[] 
   },
   TIER_3: {
     name: "Grand Jury",
-    label: "TIER_3 (500k $VSWARM)",
+    label: "TIER 3 · PREMIUM",
     perks: ["Top AI versions (Gemini 3 Pro, Grok 4)", "+ Real-time alerts", "+ Priority queue", "50 scans/day"],
   },
   SWARM_DEBATE: {
     name: "Consensus",
-    label: "SWARM_DEBATE (1M $VSWARM)",
+    label: "CONSENSUS · ULTIMATE",
     perks: [
       "ALL models (Gemini, Grok, Kimi, Codex)",
       "20+ specialized agents",
       "Different AI for each function (multiple perspectives)",
       "Full debate until consensus reached",
-      "5 scans/day + token burn per scan",
+      "5 debates/day",
     ],
   },
 };
@@ -793,7 +793,7 @@ export default function ScanReport({
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-sm font-medium">Tier comparison</p>
-              <p className="mt-1 text-xs text-white/55">See what unlocks when you stake more $VSWARM.</p>
+              <p className="mt-1 text-xs text-white/55">See what unlocks when you upgrade your tier.</p>
             </div>
             <div className="text-right">
               <div className="text-xs text-white/50">Your tier</div>
@@ -968,7 +968,7 @@ export default function ScanReport({
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm font-medium">Tier comparison</p>
-            <p className="mt-1 text-xs text-white/55">See what unlocks when you stake more $VSWARM.</p>
+            <p className="mt-1 text-xs text-white/55">See what unlocks when you upgrade your tier.</p>
           </div>
           <div className="text-right">
             <div className="text-xs text-white/50">Your tier</div>
@@ -1155,7 +1155,7 @@ export default function ScanReport({
                   className="px-8 bg-gradient-to-r from-vs-purple to-vs-cyan hover:scale-[1.02] transition-transform"
                   onClick={() => window.location.href = '/staking'}
                 >
-                  Unlock with 1,000 $VSWARM
+                  Upgrade to Premium
                 </Button>
                 <Button variant="secondary" size="md" onClick={() => window.location.href = '/tiers'}>
                   Compare Tiers

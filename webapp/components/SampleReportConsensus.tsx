@@ -6,7 +6,7 @@ export default function SampleReportConsensus() {
   return (
     <SampleReportShell
       tier="consensus"
-      badge="CONSENSUS TIER (1M $VSWARM) ⭐⭐ ULTIMATE"
+      badge="CONSENSUS TIER ⭐⭐ ULTIMATE"
       title="Example Token (EXM)"
       subtitle="Chain: Base"
       score="7.6/10"

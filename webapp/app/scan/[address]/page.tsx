@@ -772,7 +772,7 @@ function ResultsView({ result, currentTier = "FREE" }: { result: ScanResult; cur
                           const TIER_UPGRADES: Record<string, { name: string; threshold: string; perks: string[] }> = {
                             FREE: {
                               name: "Tier 1 — Investigator",
-                              threshold: "50K $VSWARM",
+                              threshold: "Pro",
                               perks: [
                                 "6 AI agents with full analysis",
                                 "Devil's Advocate peer review",
@@ -783,7 +783,7 @@ function ResultsView({ result, currentTier = "FREE" }: { result: ScanResult; cur
                             },
                             TIER_1: {
                               name: "Tier 2 — Prosecutor",
-                              threshold: "150K $VSWARM",
+                              threshold: "Pro+",
                               perks: [
                                 "Upgraded AI models (Gemini 3 Pro, Grok 4)",
                                 "VisionBot — screenshot & chart analysis",
@@ -794,7 +794,7 @@ function ResultsView({ result, currentTier = "FREE" }: { result: ScanResult; cur
                             },
                             TIER_2: {
                               name: "Tier 3 — Grand Jury",
-                              threshold: "~$1,000 in $VSWARM",
+                              threshold: "Premium",
                               perks: [
                                 "Top-tier AI (Opus, GPT-5, Grok 4, Gemini Pro)",
                                 "Real-time alerts on sentiment shifts",
@@ -805,7 +805,7 @@ function ResultsView({ result, currentTier = "FREE" }: { result: ScanResult; cur
                             },
                             TIER_3: {
                               name: "Consensus — Swarm Debate",
-                              threshold: "~$2,500 in $VSWARM",
+                              threshold: "Ultimate",
                               perks: [
                                 "ALL models (Opus, GPT-5, Grok 4, Gemini Pro, Kimi)",
                                 "Adversarial debate until consensus (CDI < 0.1)",
@@ -830,7 +830,7 @@ function ResultsView({ result, currentTier = "FREE" }: { result: ScanResult; cur
 
                               <div className="text-center pt-2">
                                 <Link
-                                  href="/buy"
+                                  href="/tiers"
                                   className="btn-primary inline-flex h-12 items-center justify-center rounded-xl px-8 text-sm font-bold text-black"
                                 >
                                   Get $VSWARM — Unlock {next.name.split(" — ")[0]}
@@ -848,13 +848,13 @@ function ResultsView({ result, currentTier = "FREE" }: { result: ScanResult; cur
                     {!showUpgradeDetails && (
                       <div className="text-center">
                         <Link
-                          href="/buy"
+                          href="/tiers"
                           className="btn-primary inline-flex h-12 items-center justify-center rounded-xl px-8 text-sm font-bold text-black"
                         >
                           {currentTier === "FREE" ? "Upgrade to Tier 1" : "Upgrade to Next Tier"}
                         </Link>
                         <p className="mt-2 text-xs text-white/40">
-                          Hold more $VSWARM to unlock deeper analysis
+                          Upgrade your tier to unlock deeper analysis
                         </p>
                       </div>
                     )}

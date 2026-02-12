@@ -5,7 +5,7 @@ export type Tier = {
   key: TierKey;
   /** User-friendly display name. */
   name: string;
-  /** Minimum $VSWARM tokens required (whole tokens, not wei). */
+  /** Minimum balance required for tier access. */
   minBalance: number;
   /** Daily scan quota for MVP. */
   dailyScans: number;

@@ -271,7 +271,7 @@ export default function SwarmAnimation({
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent pt-20">
                   <div className="mb-2 text-3xl">🔒</div>
                   <h3 className="text-lg font-bold text-white">Unlock Full Report</h3>
-                  <p className="mb-6 text-sm text-slate-400">Premium insights available with 50k $VSWARM</p>
+                  <p className="mb-6 text-sm text-slate-400">Premium insights available with Pro tier</p>
                   
                   <button className="rounded-full bg-gradient-to-r from-yellow-500 to-yellow-600 px-8 py-3 font-bold text-black shadow-lg shadow-yellow-500/20 hover:scale-105 transition-transform">
                       Upgrade to Investigator

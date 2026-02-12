@@ -113,10 +113,10 @@ export default function LandingPage() {
               Scan Token Now
             </Link>
             <Link
-              href="/buy"
+              href="/tiers"
               className="btn-secondary inline-flex h-14 items-center justify-center rounded-xl px-10 text-base font-bold uppercase tracking-wider"
             >
-              Buy $VSWARM
+              View Plans
             </Link>
           </div>
         </div>
@@ -304,21 +304,21 @@ export default function LandingPage() {
               <div className="absolute -right-2 top-4 rotate-12 rounded-full bg-[#FFD700] px-3 py-1 text-xs font-bold text-black">Most Popular</div>
               <div className="relative">
                 <div className="text-xs font-bold uppercase tracking-wider text-[#FFD700]">Investigator</div>
-                <div className="mt-2 text-2xl font-bold text-white">Hold ~$100 <span className="text-[#6B46C1]">$VSWARM</span></div>
-                <div className="mt-1 text-sm text-white/50">Token-gated access</div>
+                <div className="mt-2 text-2xl font-bold text-white">Pro</div>
+                <div className="mt-1 text-sm text-white/50">Wallet-gated access</div>
                 <ul className="mt-6 space-y-3 text-sm text-white/70">
                   <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>6 AI agents + Devil&apos;s Advocate</span></li>
                   <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Gemini Flash + Grok 3 + GPT-4o Mini</span></li>
                   <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Cross-agent debates + DA peer review</span></li>
                   <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Full evidence locker + share cards</span></li>
                 </ul>
-                <Link href="/buy" className="btn-primary mt-8 block w-full rounded-xl py-3 text-center text-sm font-bold text-black">Get $VSWARM</Link>
+                <Link href="/tiers" className="btn-primary mt-8 block w-full rounded-xl py-3 text-center text-sm font-bold text-black">Get Started</Link>
               </div>
             </Card>
 
             <Card className="p-8">
               <div className="text-xs font-bold uppercase tracking-wider text-white/60">Prosecutor</div>
-              <div className="mt-2 text-2xl font-bold text-white">Hold ~$500 <span className="text-[#6B46C1]">$VSWARM</span></div>
+              <div className="mt-2 text-2xl font-bold text-white">Pro+</div>
               <div className="mt-1 text-sm text-[#FFD700]">🔜 Coming Soon</div>
               <ul className="mt-6 space-y-3 text-sm text-white/70">
                 <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>All agents + VisionBot</span></li>
@@ -331,7 +331,7 @@ export default function LandingPage() {
 
             <Card className="p-8 border-[#FF6B6B]/20">
               <div className="text-xs font-bold uppercase tracking-wider text-[#FF6B6B]">Grand Jury</div>
-              <div className="mt-2 text-2xl font-bold text-white">Hold ~$2,000 <span className="text-[#6B46C1]">$VSWARM</span></div>
+              <div className="mt-2 text-2xl font-bold text-white">Premium</div>
               <div className="mt-1 text-sm text-[#FFD700]">🔜 Coming Soon</div>
               <ul className="mt-6 space-y-3 text-sm text-white/70">
                 <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Full 20+ agent swarm</span></li>
@@ -345,7 +345,7 @@ export default function LandingPage() {
 
             <Card className="p-8 border-[#FF4500]/20">
               <div className="text-xs font-bold uppercase tracking-wider text-[#FF4500]">🏛️ Consensus</div>
-              <div className="mt-2 text-2xl font-bold text-white">Hold ~$5,000 <span className="text-[#6B46C1]">$VSWARM</span></div>
+              <div className="mt-2 text-2xl font-bold text-white">Ultimate</div>
               <div className="mt-1 text-sm text-[#FFD700]">🔜 Coming Soon</div>
               <ul className="mt-6 space-y-3 text-sm text-white/70">
                 <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>4 frontier AIs debate to consensus</span></li>
@@ -383,10 +383,10 @@ export default function LandingPage() {
           <h2 className="font-orbitron text-2xl font-bold uppercase text-center md:text-3xl">FAQ</h2>
           <div className="mt-10 space-y-4">
             {[
-              { q: "What is VerdictSwarm?", a: "An AI-powered token security platform built on Solana that deploys a swarm of 20+ specialized AI agents to evaluate any token's risk. The agents independently analyze on-chain data, market signals, and social sentiment — then engage in adversarial debate until reaching consensus. Think of it as a courtroom trial for every token, with AI prosecutors, defenders, and a jury." },
-              { q: "How is this different from other scanners?", a: "Most scanners use a single model or static rules. VerdictSwarm runs a Proprietary Adversarial Consensus Engine that coordinates 20+ specialized AI agents powered by Gemini, Grok, Kimi, Claude, and ChatGPT (Codex). Agents independently analyze, cross-check, and enter adversarial debate when they disagree — then converge using our proprietary scoring methodology. This multi-model approach consistently outperforms single-model analysis, and every verdict is stored immutably on Solana." },
+              { q: "What is VerdictSwarm?", a: "An AI-powered token security platform built on Solana that deploys specialized AI agents to evaluate any token's risk. The agents independently analyze on-chain data, market signals, and social sentiment — then engage in adversarial debate until reaching consensus. Think of it as a courtroom trial for every token, with AI prosecutors, defenders, and a jury." },
+              { q: "How is this different from other scanners?", a: "Most scanners use a single model or static rules. VerdictSwarm runs a Proprietary Adversarial Consensus Engine that coordinates specialized AI agents powered by Gemini, Grok, Kimi, Claude, and ChatGPT (Codex). Agents independently analyze, cross-check, and enter adversarial debate when they disagree — then converge using our proprietary scoring methodology. This multi-model approach consistently outperforms single-model analysis, and every verdict is stored immutably on Solana." },
               { q: "Is the free tier actually free?", a: "Yes. No wallet, no signup, no catch. Paste any Solana SPL token address or EVM contract address and get a real AI-powered analysis with 2 agents. Free forever — we want you to see the quality before upgrading." },
-              { q: "Why do I need to hold $VSWARM to upgrade?", a: "$VSWARM launches on Solana as an SPL token. Token-gating aligns incentives — holders are invested in the platform's success. No subscriptions, no credit cards. Hold the tokens in your wallet, and you have access. Sell them, and access reverts. Simple." },
+              { q: "How do I upgrade to higher tiers?", a: "Connect your Solana wallet to access Pro tier with 6 agents + adversarial debate. Higher tiers with 20+ agents and frontier AI models are coming soon. Free tier requires no wallet — just paste an address and scan." },
               { q: "What AI models power the swarm?", a: "Five top-tier AI providers: Google Gemini (security analysis), xAI Grok (social signals & sentiment), Moonshot Kimi (research & deep analysis), Anthropic Claude (reasoning & architecture), and OpenAI Codex (code analysis). We continuously upgrade to the latest models — our architecture is model-agnostic, so when a better model drops, we integrate it immediately." },
               { q: "Can my AI agent/bot use VerdictSwarm?", a: "Absolutely — this is our B2A (Bot-to-Agent) play. Drop our SKILL.md into your OpenClaw agent, or use the SSE API directly. Your Solana trading bot gets swarm intelligence before every trade. One API call, instant verdict." },
               { q: "What chains are supported?", a: "Solana (native, first-class support), Ethereum, Base, Arbitrum, Polygon, BSC, Optimism, and Avalanche. Solana token scanning uses Helius RPC for deep on-chain analysis." },
@@ -416,7 +416,7 @@ export default function LandingPage() {
           <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm">
             <Link href="/roadmap" className="text-white/40 hover:text-white/60 transition">View Roadmap →</Link>
             <span className="text-white/20">|</span>
-            <Link href="/buy" className="text-[#6B46C1] hover:text-[#7C3AED] transition">Get $VSWARM →</Link>
+            <Link href="/tiers" className="text-[#6B46C1] hover:text-[#7C3AED] transition">View Plans →</Link>
           </div>
         </div>
       </section>

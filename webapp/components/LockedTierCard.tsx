@@ -58,7 +58,7 @@ export default function LockedTierCard({
               style={{ width: `${pct}%` }}
             />
           </div>
-          <p className="mt-2 text-xs text-white/45">Placeholder — wired to bonding curve later.</p>
+          <p className="mt-2 text-xs text-white/45">Placeholder — wired to tier gating later.</p>
         </div>
       </div>
     </Card>

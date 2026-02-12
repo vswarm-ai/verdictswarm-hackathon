@@ -102,12 +102,12 @@ export default function CommunityPage() {
               </div>
             </div>
             <div className="rounded-xl border border-[#FFD700]/20 bg-[#FFD700]/5 p-4">
-              <div className="text-xs font-bold text-[#FFD700] uppercase tracking-wider mb-2">Why Hold $VSWARM</div>
+              <div className="text-xs font-bold text-[#FFD700] uppercase tracking-wider mb-2">Why Join Early</div>
               <div className="space-y-1.5 text-sm text-white/60">
-                <div>✦ Selling = losing access to premium agents</div>
-                <div>✦ Burns reduce supply — your share grows over time</div>
-                <div>✦ Early members shape the protocol&apos;s future</div>
-                <div>✦ Governance rights coming post-graduation</div>
+                <div>✦ Early access to new agents and models as they launch</div>
+                <div>✦ Shape the product roadmap with your feedback</div>
+                <div>✦ Early members shape the platform&apos;s future</div>
+                <div>✦ Community voting on features coming soon</div>
               </div>
             </div>
           </div>
@@ -120,9 +120,8 @@ export default function CommunityPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#FFD700]">The Mission</p>
           <h2 className="font-orbitron mt-2 text-2xl font-bold md:text-3xl">Help Us Graduate</h2>
           <p className="text-sm text-white/50 mt-2 max-w-xl mx-auto">
-            $VSWARM launches on Solana. When the community 
-            sufficient liquidity on Raydium, we <strong className="text-white/70">unlock full trading</strong> — 
-            unlocking DEX trading, locked liquidity, and the full ecosystem.
+            VerdictSwarm is growing. As our community expands, we&apos;re unlocking new tiers,
+            more agents, and deeper analysis capabilities — <strong className="text-white/70">built by the community, for the community</strong>.
           </p>
         </div>
 
@@ -131,7 +130,7 @@ export default function CommunityPage() {
             <div className="text-center space-y-2 p-3">
               <div className="text-3xl">🎯</div>
               <h3 className="text-sm font-bold text-[#FFD700]">The Goal</h3>
-              <p className="text-xs text-white/50">Community-driven liquidity growth on Solana to unlock full DEX trading on Raydium</p>
+              <p className="text-xs text-white/50">Community growth milestones to unlock new tiers and features</p>
             </div>
             <div className="text-center space-y-2 p-3">
               <div className="text-3xl">💎</div>
@@ -174,13 +173,13 @@ export default function CommunityPage() {
           {[
             {
               icon: "📈",
-              title: "Bonding Curve Advantage",
-              desc: "Pre-graduation buyers get the best prices. The curve rewards early conviction.",
+              title: "Early Adopter Advantage",
+              desc: "Early users get free access to features that will be premium later. First-mover advantage is real.",
             },
             {
               icon: "🔥",
-              title: "Deflationary from Day 1",
-              desc: "Every scan burns tokens. Your percentage of supply grows even if you don't buy more.",
+              title: "Product Improves Daily",
+              desc: "Every scan makes the AI smarter. Early users benefit from continuous model upgrades.",
             },
             {
               icon: "🤖",
@@ -194,8 +193,8 @@ export default function CommunityPage() {
             },
             {
               icon: "🏗️",
-              title: "Shape the Protocol",
-              desc: "Early holders will have governance input on burns, features, and treasury decisions.",
+              title: "Shape the Product",
+              desc: "Early users will have input on features, agent priorities, and new model integrations.",
             },
             {
               icon: "🐝",
@@ -221,9 +220,9 @@ export default function CommunityPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
             {[
               { step: "1", text: "Free scans attract users", color: "#00D4AA" },
-              { step: "2", text: "Users want more agents → buy $VSWARM", color: "#6B46C1" },
-              { step: "3", text: "Scans burn tokens → supply shrinks", color: "#FF8C00" },
-              { step: "4", text: "Scarcity + utility → appreciation", color: "#FFD700" },
+              { step: "2", text: "Users want deeper analysis → upgrade tier", color: "#6B46C1" },
+              { step: "3", text: "More scans = smarter AI models", color: "#FF8C00" },
+              { step: "4", text: "Better verdicts → more users", color: "#FFD700" },
             ].map((s) => (
               <div key={s.step} className="rounded-lg border border-[#2D2D3A] p-3 text-center">
                 <div className="font-orbitron text-lg font-bold" style={{ color: s.color }}>{s.step}</div>
@@ -268,13 +267,13 @@ export default function CommunityPage() {
           />
           <Phase
             number="2"
-            title="Graduation"
-            description="Community rallies around $VSWARM on Solana. Token goes live on Raydium. Full ecosystem unlocks."
+            title="Pro Launch"
+            description="Wallet-gated Pro tier goes live. Full 6-agent adversarial consensus unlocked for the community."
             items={[
-              "Reach liquidity milestone on Raydium",
-              "DEX liquidity locked for 10 years",
-              "Tier 1 unlocked — 6 agents + Devil's Advocate, 3 AI models, debates",
-              "Early Swarm Rewards distributed to community",
+              "Pro tier live — connect wallet to unlock",
+              "6 agents + Devil's Advocate, 4 AI models, debates",
+              "On-chain verdict storage on Solana",
+              "Early community members get priority access",
             ]}
             status="NEXT"
             accent="#FFD700"
@@ -288,7 +287,7 @@ export default function CommunityPage() {
               "auditswarm.io — deep smart contract auditing",
               "launchswarm.io — token launch analysis & scoring",
               "watchswarm.io — portfolio monitoring & alerts",
-              "Governance: holders vote on burns, features, treasury",
+              "Community voting on features, agent priorities, new integrations",
             ]}
             status="LATER"
             accent="#6B46C1"
@@ -326,10 +325,10 @@ export default function CommunityPage() {
             Follow @VswarmAi
           </a>
           <Link
-            href="/buy"
+            href="/tiers"
             className="inline-flex items-center gap-2 rounded-xl bg-[#6B46C1] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#7C3AED]"
           >
-            ⚡ Get $VSWARM
+            ⚡ View Plans
           </Link>
           <Link
             href="/dapp"

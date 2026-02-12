@@ -163,7 +163,7 @@ export default function HeroSearch() {
             <div className="mt-6 rounded-xl border border-vs-border bg-black/20 p-4">
               <p className="text-xs text-white/60">Aligned incentives</p>
               <p className="mt-1 text-sm text-white/75">
-                Stake $VSWARM to earn from protocol fees, while every scan burns tokens to drive
+                Upgrade to Pro for full adversarial consensus — 6 specialized agents analyze and debate to deliver
                 scarcity.
               </p>
             </div>

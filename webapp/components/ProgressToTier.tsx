@@ -41,7 +41,7 @@ const ProgressToTier: React.FC<ProgressToTierProps> = ({
           <p className="text-xs text-white/60">
             {remaining > 0 ? (
               <>
-                <span className="font-mono text-vs-cyan">{formattedRemaining}</span> more $VSWARM unlocks full swarm
+                <span className="font-mono text-vs-cyan">{formattedRemaining}</span> more to unlock full swarm analysis
               </>
             ) : (
               "Tier Unlocked"

@@ -44,7 +44,7 @@
 #### 5. Tier System (optional)
 - Show the 5 tiers: Free (2 agents) → Consensus (20+ agents + debate)
 - More agents = more perspectives = higher accuracy
-- Token-gated: hold $VSWARM to unlock higher tiers
+- Wallet-gated: connect Solana wallet to unlock higher tiers
 
 ### Solana Integration Summary (10 sec)
 - Solana wallet connect (Phantom + Solflare)

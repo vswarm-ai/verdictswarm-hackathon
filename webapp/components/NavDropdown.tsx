@@ -8,8 +8,6 @@ const MENU_ITEMS = [
   { href: "/", label: "🏠 Home" },
   { href: "/community", label: "🐝 Community" },
   { href: "/roadmap", label: "🗺️ Roadmap" },
-  { href: "/buy", label: "⚡ Buy $VSWARM" },
-  { href: "/tokenomics", label: "📊 Tokenomics" },
   { href: "/integrate", label: "🤖 Connect AI Agent" },
 ];
 

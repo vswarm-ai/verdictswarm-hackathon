@@ -26,7 +26,7 @@ export default function TierComparison() {
           <p className="text-xs tracking-widest text-white/60">TIERS</p>
           <h2 className="text-2xl font-semibold">Choose your verdict power</h2>
           <p className="max-w-2xl text-sm text-white/70">
-            Start free. Hold $VSWARM to unlock Tier 1 analysis with an agent swarm.
+            Start free. Upgrade to Pro for full 6-agent adversarial analysis.
           </p>
         </div>
 
@@ -67,7 +67,7 @@ export default function TierComparison() {
                   <p className="mt-1 text-xs text-white/60">3-agent swarm + detailed report.</p>
                 </div>
                 <span className="rounded-full border border-vs-border bg-black/30 px-3 py-1 text-xs text-white/80">
-                  Hold $VSWARM
+                  Connect Wallet
                 </span>
               </div>
 

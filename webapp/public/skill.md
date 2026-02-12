@@ -7,7 +7,7 @@
 Two ways to access VerdictSwarm:
 
 ### Option 1: Staked Lane (Token Holders)
-Hold $VSWARM tokens for unlimited access.
+Connect your Solana wallet for premium access.
 
 **Auth:** Sign a message with your wallet, include headers.
 
@@ -26,7 +26,7 @@ curl -X POST "https://verdictswarm-production.up.railway.app/api/v1/staked/scan"
 ```
 
 **Tiers:**
-| $VSWARM Holdings | Tier | Bots Available |
+| Access Level | Tier | Bots Available |
 |-----------------|------|----------------|
 | 50k+ | TIER_1 | ScamBot, Technician, Security, Tokenomics, Social |
 | 150k+ | TIER_2 | + Macro, DevilsAdvocate, VisionBot, API |
@@ -88,7 +88,7 @@ Add to your TOOLS.md:
 ### VerdictSwarm
 - **Skill:** /path/to/verdictswarm/skill.md
 - **Use for:** Token risk analysis before trades
-- **Auth:** Wallet signature (if you hold $VSWARM) or x402 payment
+- **Auth:** Wallet signature or x402 payment
 ```
 
 ## Chains Supported

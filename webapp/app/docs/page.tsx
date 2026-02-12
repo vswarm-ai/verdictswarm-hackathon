@@ -34,14 +34,6 @@ export default function DocsPage() {
           </Card>
         </Link>
 
-        <Link href="/tokenomics">
-          <Card className="p-6 h-full transition hover:border-[#6B46C1]/40">
-            <span className="text-2xl">💰</span>
-            <h2 className="text-lg font-bold text-white mt-2">Tokenomics</h2>
-            <p className="text-sm text-white/50 mt-1">$VSWARM supply, burn mechanics, token-gated access, and the flywheel.</p>
-          </Card>
-        </Link>
-
         <Link href="/community">
           <Card className="p-6 h-full transition hover:border-[#6B46C1]/40">
             <span className="text-2xl">🐝</span>

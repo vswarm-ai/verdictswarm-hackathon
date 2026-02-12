@@ -35,7 +35,6 @@ export default function ScanDashboard({
           <div className="mt-3 flex items-center gap-3">
             <TierBadge tierKey={user.tierKey} />
             <span className="text-xs text-white/55">
-              $VSWARM (Base): {user.vswarmBalance.toLocaleString()}
             </span>
           </div>
 

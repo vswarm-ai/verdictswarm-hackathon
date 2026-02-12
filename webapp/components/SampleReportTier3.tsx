@@ -4,12 +4,12 @@ export default function SampleReportTier3() {
   return (
     <SampleReportShell
       tier="tier3"
-      badge="TIER 3 (GRAND JURY · ~$1,000 in $VSWARM) ⭐ PREMIUM"
+      badge="TIER 3 (GRAND JURY) ⭐ PREMIUM"
       title="Example Token (EXM)"
       subtitle="Chain: Base"
       score="7.6/10"
       confidence="94%"
-      ctaHref="/tokenomics"
+      ctaHref="/tiers"
       ctaLabel="Upgrade to Consensus"
     >
       <MonoBlock>{`⚖️ FULL JURY ANALYSIS (ALL FLAGSHIP MODELS)

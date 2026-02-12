@@ -116,7 +116,7 @@ export default function SampleReportShell({
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-black/25 px-4 py-4">
             <div>
               <div className="text-sm font-semibold">Unlock more bots + higher confidence</div>
-              <div className="mt-1 text-xs text-white/55">Stake $VSWARM to upgrade your scan depth.</div>
+              <div className="mt-1 text-xs text-white/55">Upgrade your plan for deeper analysis.</div>
             </div>
             <Link
               href={ctaHref}

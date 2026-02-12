@@ -192,7 +192,7 @@ export default function AboutPage() {
           {[
             { icon: "🔍", title: "SPL Token Scanning", desc: "Native Solana token analysis via Helius RPC — deep on-chain data, holder analysis, program verification" },
             { icon: "📝", title: "On-Chain Verdicts", desc: "Every scan stored as immutable PDA on Solana via Anchor program — permanent, verifiable, auditable" },
-            { icon: "🏪", title: "$VSWARM SPL Token", desc: "Token-gated access via Solana SPL token — hold to unlock higher tiers, every scan burns tokens" },
+            { icon: "🏪", title: "Tiered Access", desc: "Wallet-gated tiers — connect your Solana wallet to unlock deeper multi-agent analysis" },
             { icon: "⚡", title: "Solana Speed", desc: "Sub-second finality for on-chain verdict storage — no waiting for block confirmations" },
           ].map((item) => (
             <div key={item.title} className="text-center p-4 rounded-xl border border-[#9945FF]/10 bg-[#9945FF]/5">

@@ -105,7 +105,7 @@ Architecture is **model-agnostic** — when a better model drops, we integrate i
 |---------|-------------|
 | 🔍 **SPL Token Scanning** | Native Solana token analysis via Helius RPC — deep on-chain data, holder analysis |
 | 📝 **On-Chain Verdicts** | Every scan stored as immutable PDA on Solana via Anchor program |
-| 🏪 **$VSWARM SPL Token** | Token-gated access — hold to unlock higher tiers, scans burn tokens |
+| 🏪 **Tiered Access** | Wallet-gated tiers — connect wallet to unlock deeper multi-agent analysis |
 | ⚡ **Solana Speed** | Sub-second finality for on-chain verdict storage |
 
 ### On-Chain Verdict Storage (Deployed on Devnet)

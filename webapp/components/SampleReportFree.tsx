@@ -7,7 +7,7 @@ export default function SampleReportFree() {
       badge="FREE (SCOUT)"
       title="Example Token (EXM)"
       subtitle="Chain: Base"
-      ctaHref="/tokenomics"
+      ctaHref="/tiers"
       ctaLabel="Upgrade to Investigator"
     >
       <MonoBlock>{`BASIC SCAN RESULTS

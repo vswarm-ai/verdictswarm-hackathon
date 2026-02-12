@@ -11,7 +11,7 @@ export default function TiersPage() {
         </h1>
         <p className="text-white/50 max-w-xl mx-auto">
           Each tier unlocks more agents, more advanced AI models, and deeper consensus protocols.
-          More intelligence = more accuracy. Every scan burns $VSWARM.
+          More intelligence = more accuracy. Upgrade tiers for deeper analysis.
         </p>
       </div>
 
@@ -45,7 +45,7 @@ export default function TiersPage() {
           </thead>
           <tbody className="text-white/60">
             {[
-              { label: "$VSWARM Required", free: "0", t1: "~$100 worth", t2: "~$500 worth", t3: "~$1,000 worth", t4: "~$5,000 worth" },
+              { label: "Access", free: "No wallet needed", t1: "Connect wallet", t2: "Pro+ (coming soon)", t3: "Premium (coming soon)", t4: "Ultimate (coming soon)" },
               { label: "Swarm Agents", free: "2 (Technician + Security)", t1: "6 + Devil's Advocate", t2: "7 (+ VisionBot)", t3: "All agents", t4: "All agents" },
               { label: "AI Models", free: "Gemini Flash", t1: "Gemini Flash, Grok 3, GPT-4o Mini, Haiku", t2: "Gemini Pro, Grok 4", t3: "Opus, GPT-5, Grok 4, Gemini Pro, Kimi", t4: "All 5 frontier models" },
               { label: "Analysis Categories", free: "Technical + Safety", t1: "Technical, Safety, Tokenomics, Social, Macro, DA", t2: "+ Vision, source citations", t3: "All + real-time alerts", t4: "All + cross-model debate" },
@@ -71,11 +71,10 @@ export default function TiersPage() {
       </Card>
 
       {/* Daily Scans + Burns */}
-      <Card className="p-6 border-[#FF6B6B]/20 bg-gradient-to-r from-[#FF6B6B]/5 to-transparent">
-        <h2 className="font-orbitron text-lg font-bold text-[#FF6B6B] mb-3">🔥 Every Scan Burns $VSWARM</h2>
+      <Card className="p-6 border-[#00D4AA]/20 bg-gradient-to-r from-[#00D4AA]/5 to-transparent">
+        <h2 className="font-orbitron text-lg font-bold text-[#00D4AA] mb-3">📊 Daily Scan Allowances</h2>
         <p className="text-sm text-white/60 leading-relaxed mb-4">
-          Each tier includes daily free scans. Need more? Purchase credit packs with $VSWARM — <strong className="text-white/80">60% of every credit purchase is permanently burned</strong>,
-          reducing supply and increasing scarcity for all holders.
+          Each tier includes daily scans. Need more? Additional scan packs will be available for purchase as higher tiers launch.
         </p>
         <div className="grid gap-3 sm:grid-cols-5 text-center">
           <div className="rounded-lg bg-[#0A0B0F] p-3">
@@ -105,7 +104,7 @@ export default function TiersPage() {
           </div>
         </div>
         <p className="text-xs text-white/30 mt-4 text-center italic">
-          Credit pack purchasing coming soon. Higher tiers get cheaper per-scan rates + 30% discount when paying in $VSWARM.
+          Additional scan packs coming soon. Higher tiers get cheaper per-scan rates.
         </p>
       </Card>
 
@@ -154,7 +153,7 @@ export default function TiersPage() {
             <span className="text-2xl">🐝</span>
             <div>
               <h3 className="font-orbitron text-lg font-bold text-[#00D4AA]">Tier 1 — Investigator</h3>
-              <span className="text-xs text-white/30">Hold ~$100 worth of $VSWARM</span>
+              <span className="text-xs text-white/30">Connect Solana wallet</span>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -196,7 +195,7 @@ export default function TiersPage() {
             <span className="text-2xl">⚖️</span>
             <div>
               <h3 className="font-orbitron text-lg font-bold text-[#6B46C1]">Tier 2 — Prosecutor</h3>
-              <span className="text-xs text-white/30">Hold ~$500 worth of $VSWARM</span>
+              <span className="text-xs text-white/30">Pro+ tier</span>
             </div>
             <span className="ml-auto text-[10px] font-bold px-2 py-1 rounded-full text-[#FFD700] bg-[#FFD700]/10 border border-[#FFD700]/30">🔜 Coming Soon</span>
           </div>
@@ -229,7 +228,7 @@ export default function TiersPage() {
             <span className="text-2xl">🐋</span>
             <div>
               <h3 className="font-orbitron text-lg font-bold text-[#FFD700]">Tier 3 — Grand Jury</h3>
-              <span className="text-xs text-white/30">Hold ~$1,000 worth of $VSWARM</span>
+              <span className="text-xs text-white/30">Premium tier</span>
             </div>
             <span className="ml-auto text-[10px] font-bold px-2 py-1 rounded-full text-[#FFD700] bg-[#FFD700]/10 border border-[#FFD700]/30">🔜 Coming Soon</span>
           </div>
@@ -268,7 +267,7 @@ export default function TiersPage() {
             <span className="text-2xl">🏛️</span>
             <div>
               <h3 className="font-orbitron text-lg font-bold text-[#FF4500]">Tier 4 — Consensus</h3>
-              <span className="text-xs text-white/30">Hold ~$5,000 worth of $VSWARM</span>
+              <span className="text-xs text-white/30">Ultimate tier</span>
             </div>
             <span className="ml-auto text-[10px] font-bold px-2 py-1 rounded-full text-[#FFD700] bg-[#FFD700]/10 border border-[#FFD700]/30">🔜 Coming Soon</span>
           </div>
@@ -327,33 +326,33 @@ export default function TiersPage() {
         </div>
       </Card>
 
-      {/* The Burn Flywheel */}
-      <Card className="p-6 border-[#FF6B6B]/20">
+      {/* The Growth Flywheel */}
+      <Card className="p-6 border-[#00D4AA]/20">
         <h2 className="font-orbitron text-lg font-bold text-center mb-4">The Flywheel</h2>
         <div className="flex flex-wrap justify-center items-center gap-2 text-sm text-white/60">
-          <span className="rounded-lg bg-[#0A0B0F] px-3 py-1.5 border border-[#2D2D3A]">Hold $VSWARM</span>
+          <span className="rounded-lg bg-[#0A0B0F] px-3 py-1.5 border border-[#2D2D3A]">Connect wallet</span>
           <span className="text-white/30">→</span>
           <span className="rounded-lg bg-[#0A0B0F] px-3 py-1.5 border border-[#2D2D3A]">Unlock tier</span>
           <span className="text-white/30">→</span>
           <span className="rounded-lg bg-[#0A0B0F] px-3 py-1.5 border border-[#2D2D3A]">Scan tokens</span>
           <span className="text-white/30">→</span>
-          <span className="rounded-lg bg-[#FF6B6B]/10 px-3 py-1.5 border border-[#FF6B6B]/30 text-[#FF6B6B]">🔥 Burns $VSWARM</span>
+          <span className="rounded-lg bg-[#00D4AA]/10 px-3 py-1.5 border border-[#00D4AA]/30 text-[#00D4AA]">Better verdicts</span>
           <span className="text-white/30">→</span>
-          <span className="rounded-lg bg-[#00D4AA]/10 px-3 py-1.5 border border-[#00D4AA]/30 text-[#00D4AA]">Scarcity ↑</span>
+          <span className="rounded-lg bg-[#6B46C1]/10 px-3 py-1.5 border border-[#6B46C1]/30 text-[#6B46C1]">More users</span>
           <span className="text-white/30">→</span>
-          <span className="rounded-lg bg-[#FFD700]/10 px-3 py-1.5 border border-[#FFD700]/30 text-[#FFD700]">Value ↑</span>
+          <span className="rounded-lg bg-[#FFD700]/10 px-3 py-1.5 border border-[#FFD700]/30 text-[#FFD700]">Smarter AI</span>
           <span className="text-white/30">→</span>
           <span className="text-white/40 italic">repeat</span>
         </div>
         <p className="text-xs text-white/30 text-center mt-4">
-          60% of all scan credit revenue is permanently burned. The more the Swarm works, the scarcer your tokens become.
+          More scans = more data = smarter agents. The Swarm gets better with every analysis.
         </p>
       </Card>
 
       {/* CTA */}
       <div className="flex flex-wrap justify-center gap-3">
-        <Link href="/buy" className="inline-flex items-center gap-2 rounded-xl bg-[#6B46C1] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#7C3AED]">
-          Get $VSWARM →
+        <Link href="/dapp" className="inline-flex items-center gap-2 rounded-xl bg-[#6B46C1] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#7C3AED]">
+          Start Scanning →
         </Link>
         <Link href="/dapp" className="inline-flex items-center gap-2 rounded-xl border border-[#2D2D3A] px-6 py-3 text-sm text-white/60 transition hover:bg-white/5">
           Try Free Scan

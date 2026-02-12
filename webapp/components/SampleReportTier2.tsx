@@ -4,12 +4,12 @@ export default function SampleReportTier2() {
   return (
     <SampleReportShell
       tier="tier2"
-      badge="TIER 2 (PROSECUTOR · ~$500 in $VSWARM)"
+      badge="TIER 2 (PROSECUTOR) · PRO+"
       title="Example Token (EXM)"
       subtitle="Chain: Base"
       score="7.4/10"
       confidence="85%"
-      ctaHref="/tokenomics"
+      ctaHref="/tiers"
       ctaLabel="Upgrade to Grand Jury"
     >
       <MonoBlock>{`FULL AI ANALYSIS

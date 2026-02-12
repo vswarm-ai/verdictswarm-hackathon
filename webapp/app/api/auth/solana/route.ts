@@ -25,7 +25,7 @@ async function getSolanaVswarmBalance(_wallet: string): Promise<number> {
   await conn.getLatestBlockhash("confirmed");
 
   // Hackathon demo behavior:
-  // $VSWARM SPL token does not exist on Solana yet, so any verified Solana wallet
+  // Wallet-gated tier access — any verified Solana wallet
   // is granted TIER_1 to demonstrate wallet-gating UX and auth flow.
   return 50_000;
 }

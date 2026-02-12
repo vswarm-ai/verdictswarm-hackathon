@@ -45,7 +45,7 @@ export async function GET(req: Request) {
   backendUrl.searchParams.set("address", address);
   backendUrl.searchParams.set("chain", chain);
   backendUrl.searchParams.set("depth", depth);
-  // Pre-launch: accept frontend tier override for connected wallets (no $VSWARM token yet)
+  // Accept frontend tier override for connected wallets
   // Once token launches, remove this and use only session.user.tierKey
   const frontendTier = searchParams.get("tier");
   const effectiveTier = frontendTier && session.user?.address ? frontendTier : tierKey;

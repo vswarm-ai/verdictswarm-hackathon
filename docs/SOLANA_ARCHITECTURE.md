@@ -86,7 +86,7 @@ If the on-chain data matches, the verdict is verified as authentic and unaltered
 ## Wallet Integration
 
 - **Solana Wallet Adapter** with Phantom + Solflare support
-- Connected wallet → tier-gated access based on $VSWARM token balance
+- Connected wallet → tier-gated access based on wallet authentication
 - Wallet signs on-chain verdict transactions (user pays ~0.002 SOL per verdict)
 - Hackathon mode: any connected Solana wallet gets Tier 1 access
 
@@ -123,7 +123,7 @@ If the on-chain data matches, the verdict is verified as authentic and unaltered
 
 For mainnet deployment:
 - Deploy the full Anchor program (richer data model, IDL for tooling)
-- Add `$VSWARM` token burn on scan (deflationary tokenomics)
+- Add per-scan credit pricing for premium tiers
 - On-chain verdict lookup API (query by token address)
 - Cross-reference system: link multiple scans of the same token over time
 - Governance: community can flag suspicious verdicts for re-analysis
