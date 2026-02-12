@@ -291,10 +291,10 @@ export default function LandingPage() {
               <div className="mt-2 text-2xl font-bold text-white">Free</div>
               <div className="mt-1 text-sm text-white/50">No wallet needed</div>
               <ul className="mt-6 space-y-3 text-sm text-white/70">
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Instant scam &amp; honeypot detection</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>HEALTHY / UNHEALTHY verdict</span></li>
-                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>3 scans per day</span></li>
                 <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>2 AI agents (Technician + Security)</span></li>
+                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>Score (0-100) + Grade (A+ to F)</span></li>
+                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>On-chain data analysis via Helius RPC</span></li>
+                <li className="flex items-start gap-2"><span className="text-[#00D4AA]">✓</span><span>3 scans per day</span></li>
               </ul>
               <Link href="/dapp" className="mt-8 block w-full rounded-xl border border-[#2D2D3A] bg-[#1A1A28] py-3 text-center text-sm font-medium text-white/80 transition hover:border-[#6B46C1]/40 hover:bg-[#6B46C1]/10">Scan Free</Link>
             </Card>
