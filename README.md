@@ -15,14 +15,14 @@
 > **⚡ We recommend connecting a Phantom wallet to experience the full 6-agent adversarial swarm + on-chain verdict storage. This is the core demo.**
 
 1. Install [Phantom wallet](https://phantom.app/) browser extension (if you don't have it)
-2. Switch to **Devnet** (Settings → Developer Settings → Change Network → Devnet)
-3. Get free devnet SOL: use the [Solana Faucet](https://faucet.solana.com/) or run `solana airdrop 2`
+2. Switch Phantom to **Devnet** (Settings → Developer Settings → Change Network → Devnet) — our Solana program is deployed on devnet for the hackathon
+3. Get free devnet SOL: use the [Solana Faucet](https://faucet.solana.com/) or run `solana airdrop 2` — you'll need a small amount (~0.01 SOL) to sign the on-chain verdict transaction at the end
 4. Visit [verdictswarm.io](https://verdictswarm.io) and **connect your Phantom wallet** (top right) — no signing/verification needed
 5. You're instantly assigned **Investigator tier** — this unlocks **6 AI agents + Devil's Advocate + adversarial debate**
 6. Paste a token address (see suggestions below) and hit **Scan**
 7. Watch the **Interrogation Room** — agents activate in real-time, analyze independently, then debate when they disagree
-8. When the scan completes, **sign the transaction** to store the verdict immutably on Solana
-9. Click the **"On-Chain ✓"** badge to verify the transaction on Solana Explorer
+8. When the scan completes, **sign the transaction in Phantom** — this stores the verdict immutably on Solana devnet as a PDA (Program Derived Address), creating a permanent, verifiable record of the AI analysis
+9. Click the **"On-Chain ✓"** badge to verify the transaction on Solana Explorer — you can see the verdict hash, score, grade, and agent count stored on-chain
 
 Free tier (no wallet) also works — runs 2 agents without debate. **Disconnect your wallet to see the free tier, reconnect to see Tier 1.** The wallet-connected 6-agent experience is what we built for this hackathon.
 
