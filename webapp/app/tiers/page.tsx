@@ -34,7 +34,7 @@ export default function TiersPage() {
             {[
               { label: "Access", free: "No wallet needed", t1: "Connect Solana wallet" },
               { label: "Swarm Agents", free: "2 (Technician + Security)", t1: "6 + Devil's Advocate" },
-              { label: "AI Models", free: "Gemini Flash", t1: "Gemini Flash, Grok 3, GPT-4o Mini, Claude Haiku" },
+              { label: "AI Models", free: "GPT-4o Mini, Claude Haiku", t1: "GPT-4o Mini, Claude Haiku, Gemini Flash, Gemini Pro, Grok" },
               { label: "Analysis Categories", free: "Technical + Safety", t1: "Technical, Safety, Tokenomics, Social, Macro, DA" },
               { label: "Debate Protocol", free: "—", t1: "✅ When agents disagree" },
               { label: "Evidence Depth", free: "5 findings shown", t1: "Full evidence locker" },
@@ -78,7 +78,7 @@ export default function TiersPage() {
             <div>
               <h4 className="text-xs font-bold text-white/50 uppercase tracking-wider mb-2">Architecture</h4>
               <ul className="space-y-1.5 text-xs text-white/50">
-                <li>🧠 <strong className="text-white/70">Model:</strong> Gemini Flash</li>
+                <li>🧠 <strong className="text-white/70">Models:</strong> GPT-4o Mini (Technician) + Claude Haiku (Security)</li>
                 <li>⚡ <strong className="text-white/70">Architecture:</strong> 2-agent parallel analysis</li>
                 <li>🎯 <strong className="text-white/70">Output:</strong> Score (0-100), Grade, evidence trail</li>
                 <li>⏱️ <strong className="text-white/70">Speed:</strong> ~10 seconds</li>
@@ -117,7 +117,7 @@ export default function TiersPage() {
             <div>
               <h4 className="text-xs font-bold text-white/50 uppercase tracking-wider mb-2">AI Architecture</h4>
               <ul className="space-y-1.5 text-xs text-white/50">
-                <li>🧠 <strong className="text-white/70">Models:</strong> Gemini Flash + Grok 3 + GPT-4o Mini + Claude Haiku</li>
+                <li>🧠 <strong className="text-white/70">Models:</strong> GPT-4o Mini + Claude Haiku + Gemini Flash + Gemini Pro + Grok</li>
                 <li>⚡ <strong className="text-white/70">Architecture:</strong> Parallel multi-agent with cross-referencing</li>
                 <li>🔥 <strong className="text-white/70">Debate Protocol:</strong> Agents flag disagreements → real-time debate</li>
                 <li>🔄 <strong className="text-white/70">Consensus:</strong> DA challenges strongest claim, 1-3 debate rounds</li>
@@ -129,7 +129,7 @@ export default function TiersPage() {
           </div>
           <div className="mt-4 rounded-lg bg-[#00D4AA]/5 border border-[#00D4AA]/20 p-3">
             <p className="text-xs text-[#00D4AA]/70">
-              <strong>Key advantage:</strong> 4 different AI models from different providers catch different things.
+              <strong>Key advantage:</strong> 5 different AI models from 4 providers catch different things.
               The debate protocol catches ~15% of errors that single-model analysis misses.
               On-chain verdict storage creates a permanent, verifiable record on Solana.
             </p>
@@ -142,7 +142,7 @@ export default function TiersPage() {
         <h2 className="font-orbitron text-lg font-bold text-[#FFD700] mb-3">Why More Intelligence Matters</h2>
         <div className="grid gap-4 sm:grid-cols-3 text-center">
           <div className="p-3">
-            <div className="font-orbitron text-3xl font-bold text-white">1→4</div>
+            <div className="font-orbitron text-3xl font-bold text-white">2→5</div>
             <div className="text-xs text-white/40 mt-1">AI Models</div>
             <p className="text-[10px] text-white/30 mt-1">Different models catch different things. Gemini excels at code, Grok at social data, Claude at reasoning.</p>
           </div>
