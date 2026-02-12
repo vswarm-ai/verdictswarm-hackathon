@@ -245,7 +245,7 @@ export function InterrogationRoom({
 
   const totalAgents = frame.agents.size;
   const completedAgents = Array.from(frame.agents.values()).filter((a) => a.status === "complete").length;
-  const debateRound = frame.debate?.messages?.length ? Math.max(...frame.debate.messages.map(m => m.round)) : undefined;
+  const debateRound = frame.debate?.messages?.length ? new Set(frame.debate.messages.map(m => m.round).filter(r => r > 0)).size : undefined;
   const isDebating = frame.phase === "debating";
 
   return (
