@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 const MENU_ITEMS = [
   { href: "/", label: "🏠 Home" },
-  { href: "/community", label: "🐝 Community" },
+  { href: "/tiers", label: "⚡ Tiers" },
   { href: "/integrate", label: "🤖 Connect AI Agent" },
 ];
 
