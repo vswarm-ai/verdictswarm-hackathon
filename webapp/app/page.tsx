@@ -255,14 +255,15 @@ export default function LandingPage() {
                 <span className="text-white/30 ml-2">SWARM TERMINAL — LIVE</span>
               </div>
               <div className="space-y-1.5 text-white/70">
-                <div><span className="text-cyan-400">●</span> Scan initiated for $PEPE on Ethereum</div>
-                <div><span className="text-[#00D4FF]">📊 Technician:</span> <span className="text-green-400">Analyzing on-chain metrics...</span></div>
-                <div><span className="text-[#00D4AA]">🔒 Security:</span> <span className="text-green-400">Contract source code is verified ✓</span></div>
-                <div><span className="text-[#00D4FF]">📊 Technician:</span> <span className="text-green-400">Mature contract — 1025 days old</span></div>
-                <div><span className="text-[#00D4AA]">🔒 Security:</span> <span className="text-yellow-400">⚠ Ownership not renounced</span></div>
-                <div><span className="text-[#FFD700]">💰 Tokenomics:</span> <span className="text-[#6B46C1]">🔒 Upgrade to see full analysis</span></div>
-                <div><span className="text-red-400">⚡ DISAGREEMENT: Safety score differs by 2.5 points</span></div>
-                <div><span className="text-cyan-400">●</span> <span className="text-[#00D4AA]">🐝 Verdict: 73/100 (Grade B)</span></div>
+                <div><span className="text-cyan-400">●</span> Scan initiated for <span className="text-[#14F195]">JUP</span> on Solana via Helius RPC</div>
+                <div><span className="text-[#00D4FF]">📊 Technician:</span> <span className="text-green-400">On-chain metrics — 847 days old, 2.1M holders</span></div>
+                <div><span className="text-[#FF6B6B]">🔒 Security:</span> <span className="text-green-400">Program verified ✓ Mint authority disabled ✓</span></div>
+                <div><span className="text-[#FFD700]">💰 Tokenomics:</span> <span className="text-green-400">Top 10 holders: 34.2% — moderate concentration</span></div>
+                <div><span className="text-[#6B46C1]">🐦 Social:</span> <span className="text-green-400">Strong community — 89% positive sentiment via Grok</span></div>
+                <div><span className="text-[#00D4AA]">🌍 Macro:</span> <span className="text-yellow-400">⚠ DeFi sector cooling — TVL down 8% this week</span></div>
+                <div><span className="text-[#FF0055]">😈 Devil&apos;s Advocate:</span> <span className="text-red-400">Challenging Security — insider wallet moved 2M JUP yesterday</span></div>
+                <div><span className="text-red-400">⚡ DEBATE: Security vs DA — 3 rounds, converging...</span></div>
+                <div><span className="text-cyan-400">●</span> <span className="text-[#00D4AA]">🐝 Consensus Verdict: 70/100 (Grade B) — stored on Solana ✓</span></div>
               </div>
               <div className="mt-2 text-green-400 animate-pulse">█</div>
             </div>
