@@ -180,7 +180,7 @@ export default function LandingPage() {
                 <div className="mt-4 space-y-4 text-sm text-white/70">
                   <div className="flex items-center gap-3">
                     <span className="text-[#00D4AA]">✓</span>
-                    <span>30 seconds — instant verdict</span>
+                    <span>Real-time verdict — watch agents debate live</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-[#00D4AA]">✓</span>
