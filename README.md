@@ -17,14 +17,14 @@
 1. Install [Phantom wallet](https://phantom.app/) browser extension (if you don't have it)
 2. Switch to **Devnet** (Settings → Developer Settings → Change Network → Devnet)
 3. Get free devnet SOL: use the [Solana Faucet](https://faucet.solana.com/) or run `solana airdrop 2`
-4. Visit [verdictswarm.io](https://verdictswarm.io) and **connect your wallet** (top right)
-5. You'll be assigned **Investigator tier** — this unlocks **6 AI agents + Devil's Advocate + adversarial debate**
+4. Visit [verdictswarm.io](https://verdictswarm.io) and **connect your Phantom wallet** (top right) — no signing/verification needed
+5. You're instantly assigned **Investigator tier** — this unlocks **6 AI agents + Devil's Advocate + adversarial debate**
 6. Paste a token address (see suggestions below) and hit **Scan**
 7. Watch the **Interrogation Room** — agents activate in real-time, analyze independently, then debate when they disagree
 8. When the scan completes, **sign the transaction** to store the verdict immutably on Solana
 9. Click the **"On-Chain ✓"** badge to verify the transaction on Solana Explorer
 
-Free tier (no wallet) also works — but only runs 2 agents without debate. **The wallet-connected experience is what we built for this hackathon.**
+Free tier (no wallet) also works — runs 2 agents without debate. **Disconnect your wallet to see the free tier, reconnect to see Tier 1.** The wallet-connected 6-agent experience is what we built for this hackathon.
 
 **Suggested tokens to scan:**
 | Address | Chain | Why |
@@ -74,13 +74,15 @@ Phase 4: Verdict + On-Chain Storage
 | 📊 Technician | On-chain metrics, contract maturity, trading patterns, liquidity | Gemini Flash |
 | 🔒 Security | Smart contract audit, rug pull patterns, honeypot detection | Gemini Flash |
 
-### Phase 2 — Investigator (Tier 1)
+### Phase 2 — Investigator (Tier 1, wallet-connected)
 | Agent | Role | Model |
 |-------|------|-------|
-| 💰 Tokenomics | Supply distribution, inflation, holder concentration, vesting | Gemini Pro |
-| 🐦 Social Intel | Community sentiment, social signals, bot detection, influencers | Grok (xAI) |
+| 📊 Technician | On-chain metrics, contract maturity, trading patterns, liquidity | GPT-4o Mini |
+| 🔒 Security | Smart contract audit, rug pull patterns, honeypot detection | Claude Haiku |
+| 💰 Tokenomics | Supply distribution, inflation, holder concentration, vesting | Gemini Flash |
+| 🐦 Social Intel | Community sentiment, social signals, bot detection, influencers | Grok |
 | 🌍 Macro Analyst | Market conditions, sector trends, regulatory signals | Grok |
-| 😈 Devil's Advocate | Challenges every positive finding with counter-evidence | Claude |
+| 😈 Devil's Advocate | Challenges every positive finding with counter-evidence | Gemini Pro |
 
 ### Phase 3 — Prosecutor & Grand Jury (Tier 2-3)
 | Agent | Role | Model |
