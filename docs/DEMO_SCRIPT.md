@@ -54,7 +54,6 @@
 - Every verdict = immutable PDA on Solana
 
 ### Why This Matters (10 sec)
-- "AIXBT finds the alpha — VerdictSwarm verifies it's not a rug"
 - Multi-model AI consensus is the future of crypto security
 - On-chain proofs make it trustless — don't trust VerdictSwarm, verify on Solana
 

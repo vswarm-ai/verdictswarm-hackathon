@@ -25,13 +25,13 @@ export default function AboutPage() {
         <p className="text-sm text-white/60 leading-relaxed">
           VerdictSwarm is an <strong className="text-white/80">AI-powered token security platform built on Solana</strong> that
           deploys a swarm of <strong className="text-white/80">20+ specialized AI agents</strong> to evaluate any token&apos;s risk profile.
-          Unlike single-model tools like AIXBT or GoPlus, VerdictSwarm uses <strong className="text-white/80">five top-tier AI providers</strong> —
+          Unlike single-model security tools like GoPlus or RugCheck, VerdictSwarm uses <strong className="text-white/80">five top-tier AI providers</strong> —
           Gemini, Grok, Kimi, Claude, and ChatGPT — that independently analyze different aspects, then 
           <strong className="text-white/80"> engage in adversarial debate</strong> until reaching consensus.
         </p>
         <p className="text-sm text-white/60 leading-relaxed">
           Every verdict is stored immutably on Solana as a PDA (Program Derived Address), creating a
-          permanent, verifiable record of AI security analysis. AIXBT finds the alpha — VerdictSwarm 
+          permanent, verifiable record of AI security analysis. Where other tools give a single perspective, VerdictSwarm 
           verifies it&apos;s not a rug.
         </p>
       </Card>
