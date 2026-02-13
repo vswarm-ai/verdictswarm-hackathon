@@ -164,6 +164,9 @@ class TokenData:
     # Chain identifier
     chain: str = "ethereum"  # ethereum, base, solana, etc.
 
+    # Global macro context (best-effort from CoinGecko /global)
+    macro_context: Optional[str] = None
+
 
 class DataFetcher:
     """Fetch token data from public APIs.
@@ -318,6 +321,13 @@ class DataFetcher:
         # Final fallback: use DexScreener tx count if still 0
         if out.tx_count_24h == 0 and dex_tx_count > 0:
             out.tx_count_24h = dex_tx_count
+
+        try:
+            macro = self._fetch_macro_context()
+            if macro:
+                out.macro_context = macro
+        except Exception:
+            pass  # macro context is best-effort, never block the scan
 
         return out
 
@@ -532,6 +542,13 @@ class DataFetcher:
             out.name = "Solana Token"
             out.symbol = addr[:6]
 
+        try:
+            macro = self._fetch_macro_context()
+            if macro:
+                out.macro_context = macro
+        except Exception:
+            pass  # macro context is best-effort, never block the scan
+
         return out
 
     # -------------------- Solana RPC helpers --------------------
@@ -602,6 +619,33 @@ class DataFetcher:
             return default
 
     # -------------------- CoinGecko --------------------
+
+    def _fetch_macro_context(self) -> Optional[str]:
+        """Fetch global crypto market data from CoinGecko. Best-effort, never blocks scan."""
+        try:
+            resp = requests.get(
+                "https://api.coingecko.com/api/v3/global",
+                timeout=5,
+                headers={"accept": "application/json"},
+            )
+            resp.raise_for_status()
+            data = resp.json().get("data", {})
+
+            btc_dom = data.get("market_cap_percentage", {}).get("btc", 0)
+            eth_dom = data.get("market_cap_percentage", {}).get("eth", 0)
+            total_mcap = data.get("total_market_cap", {}).get("usd", 0)
+            mcap_change = data.get("market_cap_change_percentage_24h_usd", 0)
+            total_volume = data.get("total_volume", {}).get("usd", 0)
+            active_coins = data.get("active_cryptocurrencies", 0)
+
+            return (
+                f"BTC dominance: {btc_dom:.1f}%, ETH dominance: {eth_dom:.1f}%, "
+                f"Total crypto market cap: ${total_mcap / 1e9:.1f}B (24h change: {mcap_change:+.1f}%), "
+                f"Total 24h volume: ${total_volume / 1e9:.1f}B, "
+                f"Active cryptocurrencies: {active_coins:,}"
+            )
+        except Exception:
+            return None
 
     def _fetch_coingecko_categories(self, address: str, chain: str) -> List[str]:
         platform = COINGECKO_PLATFORMS.get((chain or DEFAULT_CHAIN).lower().strip(), COINGECKO_PLATFORMS[DEFAULT_CHAIN])
