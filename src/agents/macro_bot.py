@@ -47,7 +47,7 @@ class MacroBot(BaseAgent):
         if not client.has_provider(provider):
             raise RuntimeError(f"{provider} API key not set")
 
-        macro_context = getattr(token_data, "macro_context", None) or "Not provided — use your own knowledge of current crypto market conditions."
+        macro_context = getattr(token_data, "macro_context", None)
 
         system = str(MACRO_SYSTEM)
 
@@ -62,9 +62,14 @@ class MacroBot(BaseAgent):
         user = (
             f"TODAY'S DATE: {current_date}\n\n"
             f"Assess the macro environment's impact on {token_data.name} ({token_data.symbol}).\n\n"
-            f"Token context: {sector} token, MCap ${mcap:,.0f}, Chain: {chain}\n"
-            f"Additional macro data (if provided): {macro_context}\n\n"
-            "IMPORTANT — Also consider:\n"
+            f"Token context: {sector} token, MCap ${mcap:,.0f}, Chain: {chain}\n\n"
+            + (
+                f"⚠️ LIVE MARKET DATA (use these numbers, do NOT guess or hallucinate prices):\n"
+                f"{macro_context}\n\n"
+                if macro_context else
+                "No live market data available. State that clearly — do NOT invent or guess prices.\n\n"
+            )
+            + "IMPORTANT — Also consider:\n"
             "1) NOTABLE FIGURE MOVES: Are any well-known traders, VCs, or founders publicly entering or exiting positions in this token or its sector?\n"
             "2) SECTOR-SPECIFIC NEWS: Any recent events (last 48h) that specifically impact this token's sector or chain?\n"
             "3) SMART MONEY ROTATION: Is smart money flowing into or out of this sector?\n\n"
@@ -82,7 +87,7 @@ class MacroBot(BaseAgent):
             "}\n"
             "Return ONLY a valid JSON object, no markdown fences, no text before or after.\n"
             + (MACRO_USER_TEMPLATE if MACRO_USER_TEMPLATE else
-               "Use your knowledge of current market conditions even if macro_context is empty.")
+               "Base your analysis on the LIVE MARKET DATA provided above. Do not guess prices.")
         )
 
         user = self._prepend_fact_sheet(token_data, user)
