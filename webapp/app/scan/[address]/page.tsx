@@ -186,7 +186,7 @@ function ResultsView({ result, currentTier = "FREE" }: { result: ScanResult; cur
             Verdict
           </h1>
           <p className="mt-2 text-sm text-white/50 font-mono">
-            {result.agentCount} agents • {(result.durationMs || 0) > 0 ? `${((result.durationMs || 0) / 1000).toFixed(1)}s` : "cached ⚡"}
+            {result.agentCount} agents{(result.durationMs || 0) > 0 ? ` • ${((result.durationMs || 0) / 1000).toFixed(1)}s` : ""}
             {result.onchainTx && " • On-Chain ✓"}
           </p>
           {result.onchainTx && (
